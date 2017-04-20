@@ -5,8 +5,12 @@ ExpressJS
   - npm calendar
   - Morgan Logger
   - KnexJS
+## APIs
+ - Google Calendar
+ - Facebook Events
 ## Front-end JS Libraries
 React
+Redux? MobX?
 React-css-addon (ensure that animation completes before destroying component)
 React-move (motion animations in react)
 VelocityJS - (motion animations)

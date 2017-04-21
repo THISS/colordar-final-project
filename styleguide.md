@@ -3,8 +3,8 @@
 ## ES6 Heavy
 
 ### Strings
-- double quotes for strings (```''```)
-- back ticks for string interpolation (string concatenation (joining strings together)) (```\`${}\````)
+- single quotes for strings (`''`)
+- back ticks for string interpolation (string concatenation (joining strings together)) (``${}``)
 
 ### CamelCase
 
@@ -73,13 +73,25 @@ name {
 
 ## Nesting
 - no more than 3 layers deep
+```
+body {
+  header {
+    nav {
+      h1 {
+        ^^^ NO, Stahp! Don't do thiss!!!! <--- four exclamation marks means Bizness
+      }
+    }
+  }
+}
+```
 
 ## Grid Framework
-- skeletonCSS
+- getskeleton - for grid? or do we want a flexbox grid?
 
 # REST for Routes
 
 ## /users/:id
+## /calendars/:id
 
 # Database
 - plural for table names

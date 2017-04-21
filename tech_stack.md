@@ -1,10 +1,12 @@
 # Tech Stack
-### Mobile First
+# Mobile First Approach (think simple design)
 ## Server
 ExpressJS
   - npm calendar
-  - Morgan Logger
+  - Winston Logger
   - KnexJS
+  - Web Sockets (socket.io)
+  - passport
 ## APIs
  - Google Calendar
  - Facebook Events
@@ -17,7 +19,7 @@ VelocityJS - (motion animations)
 ## Front-end Sass
 Scss
 ## Database Management System
-Postgresql
+Postgresql && browser storage? Progressive Web App
 ## Deployment
 Heroku - git hook
 ## Webpack Config
@@ -25,3 +27,4 @@ sass
 babel
   - es6 to es5
   - react
+  - html-attr

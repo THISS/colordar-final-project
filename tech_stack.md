@@ -10,12 +10,14 @@ ExpressJS
 ## APIs
  - Google Calendar
  - Facebook Events
+ - oAuth
 ## Front-end JS Libraries
-React
-Redux? MobX?
-React-css-addon (ensure that animation completes before destroying component)
-React-move (motion animations in react)
-VelocityJS - (motion animations)
+- React
+- Redux
+- React-css-addon (ensure that animation completes before destroying component)
+- React-move (motion animations in react)
+- VelocityJS or mojs.io
+- axiosjs (Ajax or xml_http_requests)
 ## Front-end Sass
 Scss
 ## Database Management System

@@ -2,9 +2,3 @@
 // eg
 require('./js/app.jsx');
 require('./sass/main.scss');
-
-
-function render() {
-  document.body.innerText = "Test";
-}
-render();

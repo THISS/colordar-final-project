@@ -8,11 +8,11 @@
 
 ### CamelCase
 
-### Let and Const (NO var)
+### let and const (**NO** var) and *mainly* **const**
 
 ### if statement should look like this
 ```
-if() {
+if () {
 
 }
 ```
@@ -54,6 +54,18 @@ const {username, email, age} = this.state.user;
 
 username;
 ```
+
+### Immutable state
+#### Objects
+`Object.assign({}, state, newState);`
+
+**NOT**
+`{...state, newState};`
+#### Arrays
+`[state].concat(newStateVariable);`
+
+**NOT**
+`[...state, newStateVariable];`
 # Sass
 
 ## class names

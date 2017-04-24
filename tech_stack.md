@@ -6,7 +6,7 @@ ExpressJS
   - Winston Logger
   - KnexJS
   - Web Sockets (socket.io)
-  - passport
+  - passport (for oAuth and user registration etc)
 ## APIs
  - Google Calendar
  - Facebook Events
@@ -14,6 +14,7 @@ ExpressJS
 ## Front-end JS Libraries
 - React
 - Redux
+- React-Router
 - React-css-addon (ensure that animation completes before destroying component)
 - React-move (motion animations in react)
 - VelocityJS or mojs.io

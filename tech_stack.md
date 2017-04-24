@@ -19,7 +19,7 @@ ExpressJS
 - React-move (motion animations in react)
 - VelocityJS or mojs.io
 - axiosjs (Ajax or xml_http_requests)
-- fullcalendar.io
+- https://github.com/intljusticemission/react-big-calendar
 ## Front-end Sass
 Scss
 ## Database Management System

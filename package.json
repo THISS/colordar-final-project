@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "front": "node front-server.js",
-    "back": "node server.js"
+    "back": "node back-server.js"
   },
   "dependencies": {
     "calendar": "^0.1.0",

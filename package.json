@@ -4,14 +4,15 @@
   "main": "index.js",
   "repository": "git@github.com:THISS/colordar-final-project.git",
   "author": "Brenton Holswich <brenton.holswich@gmail.com>",
+  "engines": {
+    "node": "7.9.0"
+  },
   "license": "MIT",
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    "start": "./start.sh",
-    "install": "./install.sh",
-    "postinstall": "./postinstall.sh",
-    "build:prod": "./prod.sh"
+    "postinstall": "./node_modules/.bin/webpack",
+    "start": "node back-server.js"
   },
   "dependencies": {
     "calendar": "^0.1.0",

@@ -27,7 +27,10 @@ module.exports = {
         test: /\.scss$/,
         exclude: /(node_modules|bower_components)/,
         use: extractSass.extract({
-          use: [  
+          use: [
+            {
+              loader: 'css-loader'
+            },
             {
               loader: 'sass-loader'
             }

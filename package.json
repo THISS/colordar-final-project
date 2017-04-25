@@ -11,7 +11,7 @@
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
+    "preheroku-push": "webpack -p --config ./webpack.prod.config.js --progress",
     "start": "node back-server.js"
   },
   "dependencies": {

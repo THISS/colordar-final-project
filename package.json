@@ -12,7 +12,7 @@
     "front": "node front-server.js",
     "back": "node back-server.js",
     "heroku-prebuild": "chmod +x ./postinstall.sh",
-    "postinstall": "./postinstall.sh",
+    "postinstall": "bash ./postinstall.sh",
     "start": "node back-server.js"
   },
   "dependencies": {

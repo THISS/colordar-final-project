@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux';
-// import ExampleReducer from './reducer-example'
+// import {combineReducers} from 'redux';
+// import TestReducer from './reducer-test';
 
 // const allReducers = combineReducers({
-//   example: ExampleReducer
+//   test: TestReducer
 // });

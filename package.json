@@ -11,7 +11,7 @@
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    "postinstall": "webpack -p --config ./webpack.prod.config.js",
+    "heroku-postbuild": "./postinstall.sh",
     "start": "node back-server.js"
   },
   "dependencies": {

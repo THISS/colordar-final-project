@@ -11,7 +11,7 @@
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    "heroku-prebuild": "yarn cache clean",
+    "heroku-prebuild": "chmod +x ./postinstall.sh",
     "postinstall": "./postinstall.sh",
     "start": "node back-server.js"
   },

@@ -3,11 +3,7 @@ import React, {Component} from 'react';
 class TodayList extends Component {
   render() {
     return (
-      <div>
-        <h2>TODAY</h2>
-        <button>+ Add an event</button>
 
-        <main className="today-container">
           <ul>
             {
               this.props.todayEvents.map((todayEvent) => {
@@ -17,8 +13,6 @@ class TodayList extends Component {
               })
             }
           </ul>
-        </main>
-      </div>
     );
   }
 }

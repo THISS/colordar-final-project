@@ -11,7 +11,6 @@
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    // "postinstall": "./node_modules/.bin/webpack",
     "start": "node back-server.js"
   },
   "dependencies": {

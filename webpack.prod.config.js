@@ -1,5 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development'
+});
 
 module.exports = {
   entry: path.resolve(__dirname, 'client/src/index.js'),
@@ -21,21 +27,23 @@ module.exports = {
     {
         test: /\.scss$/,
         exclude: /(node_modules|bower_components)/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
+        use: extractSass.extract({
+          use: [  {
             loader: 'css-loader'
           },
           {
             loader: 'sass-loader'
           }
-        ]
+          ],
+          // use style-loader in development
+          fallback: 'style-loader',
+          publicPath: '/styles/'
+        })
       }
     ]
   },
   plugins: [
+    extractSass,
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: {

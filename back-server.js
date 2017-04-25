@@ -6,7 +6,7 @@ const server = require('http').createServer(app);
 
 app.set('viewengine', 'ejs');
 /* Uncomment when testing live version */
-// app.use(express.static('client/public'));
+app.use(express.static('client/public'));
 // Middleware
 
 app.get('/', (req, res) => {

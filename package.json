@@ -12,7 +12,7 @@
     "front": "node front-server.js",
     "back": "node back-server.js",
     "heroku-prebuild": "yarn cache clean",
-    "heroku-postbuild": "./postinstall.sh",
+    "heroku-postbuild": "echo $PWD",
     "start": "node back-server.js"
   },
   "dependencies": {

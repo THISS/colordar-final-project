@@ -3,15 +3,14 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-  filename: '[name].[contenthash].css',
-  disable: process.env.NODE_ENV === 'development'
+  filename: '../styles/main.css'
 });
 
 module.exports = {
   entry: path.resolve(__dirname, 'client/src/index.js'),
   output: {
     path: path.resolve(__dirname, 'client/public/scripts'),
-    filename: 'bundle.js'
+    filename: 'main.js'
   },
   module: {
     rules: [{
@@ -36,8 +35,7 @@ module.exports = {
           }
           ],
           // use style-loader in development
-          fallback: 'style-loader',
-          publicPath: '/styles/'
+          fallback: 'style-loader'
         })
       }
     ]

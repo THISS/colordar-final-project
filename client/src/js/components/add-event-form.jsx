@@ -59,6 +59,6 @@ class AddEvent extends React.Component {
   }
 }
 
-Export default reduxForm({
+export default reduxForm({
   form: 'addEvent'
 })(addEvent);

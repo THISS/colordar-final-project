@@ -17,14 +17,15 @@ class AddUser extends React.Component {
           component="input"
           placeholder="Someone@gmail.com"/>
         </label>
+          <button type="submit"> + </button>
         <div>
-          <button type="submit">Add user</button>
+          <button type="submit">Submit user</button>
         </div>
       </form>
     );
   }
 }
 
-Export default reduxForm({
+export default reduxForm({
   form: 'addUser'
-})(addEvent);
+})(AddUser);

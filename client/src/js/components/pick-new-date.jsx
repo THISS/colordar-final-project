@@ -13,7 +13,15 @@ class NewDate extends React.Component {
         <label>
           <Field 
           name="new-date"
-          component="select">
+          component="select"
+          placeholder="Current month">
+          <option></option>
+          </Field>
+          <Field 
+          name="new-date"
+          component="select"
+          placeholder="Current day">
+          <option></option>
           </Field>
         </label>
         <div>
@@ -24,6 +32,6 @@ class NewDate extends React.Component {
   }
 }
 
-Export default reduxForm({
+export default reduxForm({
   form: 'newDate'
-})(addEvent)
+})(NewDate);

@@ -24,9 +24,14 @@ class Calendar extends Component {
             'end': new Date(2017, 3, 18)
           },
           {
+            'title': 'Meetings with important people',
+            'start': new Date(2017, 3, 17, 14, 30),
+            'end': new Date(2017, 3, 17, 16, 30)
+          },
+          {
             'title': 'DEMO DAY D:',
-            'start': new Date(2017, 4, 4),
-            'end': new Date(2017, 4, 4)
+            'start': new Date(2017, 4, 4, 19, 0),
+            'end': new Date(2017, 4, 4, 21, 0)
           }]}
           startAccessor='start'
           endAccessor='end'

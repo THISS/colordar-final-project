@@ -1,0 +1,19 @@
+{
+  "todayEvents": [
+    {
+      "id": 1,
+      "time": "11:00",
+      "event": "Brunch with mom"
+    },
+    {
+      "id": 2,
+      "time": "16:00",
+      "event": "Meeting at work"
+    },
+    {
+      "id": 3,
+      "time": "19:00",
+      "event": "Drinks with Jeff and Batman"
+    }
+  ]
+}

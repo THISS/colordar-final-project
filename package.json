@@ -4,34 +4,44 @@
   "main": "index.js",
   "repository": "git@github.com:THISS/colordar-final-project.git",
   "author": "Brenton Holswich <brenton.holswich@gmail.com>",
+  "engines": {
+    "node": "7.9.0"
+  },
   "license": "MIT",
   "scripts": {
     "front": "node front-server.js",
-    "back": "node server.js"
+    "back": "node back-server.js",
+    "heroku-prebuild": "echo pre build time",
+    "heroku-postbuild": "bash ./postinstall.sh",
+    "start": "node back-server.js"
   },
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "calendar": "^0.1.0",
+    "css-loader": "^0.28.0",
     "express": "^4.15.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "knex": "^0.12.9",
+    "moment": "^2.18.1",
     "node-sass": "^4.5.2",
     "react": "^15.5.4",
+    "react-big-calendar": "^0.13.0",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
     "webpack": "^2.4.1"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.0",
-    "sass-loader": "^6.0.3",
-    "style-loader": "^0.16.1",
     "webpack-dev-server": "^2.4.4"
   }
 }

@@ -10,7 +10,7 @@ class Calendar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="calendar">
         <BigCalendar
           events={[{
             'title': 'Making Chicken Wings',
@@ -21,7 +21,12 @@ class Calendar extends Component {
           {
             'title': 'Hot Pot',
             'start': new Date(2017, 3, 16),
-            'end': new Date(2017, 3, 17)
+            'end': new Date(2017, 3, 18)
+          },
+          {
+            'title': 'DEMO DAY D:',
+            'start': new Date(2017, 4, 4),
+            'end': new Date(2017, 4, 4)
           }]}
           startAccessor='start'
           endAccessor='end'

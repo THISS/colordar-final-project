@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TodayList from './TodayList.jsx';
 import Nav from './Nav.jsx';
+import Calendar from './Calendar.jsx';
 
 class Today extends Component {
   render() {
@@ -28,6 +29,10 @@ class Today extends Component {
           <div className="today-event-container">
             <TodayList todayEvents={this.props.todayEvents} />
           </div>
+        </section>
+
+        <section>
+          <Calendar />
         </section>
 
       </div>

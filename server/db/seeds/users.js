@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
           first_name: 'Jeff',
           email: 'jeff@lighthouselabs.com',
           password_digest: 'fkdfakdjlkasjfkdasjflasd'
-        },
+        }
       ]);
     });
 };

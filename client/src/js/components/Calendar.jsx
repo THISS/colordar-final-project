@@ -11,6 +11,7 @@ class Calendar extends Component {
       <div className="calendar">
         <BigCalendar
           selectable
+          popup
           onSelectEvent={event => alert(event.title)}
 
           events={this.props.events}

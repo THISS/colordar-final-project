@@ -13,6 +13,7 @@ const server = require('http').createServer(app);
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[ENV]);
 
+console.log(process.env.DATABASE_URL); // remove when ready
 
 // app.set('viewengine', 'ejs');
 app.use(express.static('client/public'));

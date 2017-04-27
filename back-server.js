@@ -18,7 +18,7 @@ const knex = require('knex')(knexConfig[ENV]);
 app.use(express.static('client/public'));
 // Middleware
 
-app.get('/', (req, res) => {
+app.get('/dbase', (req, res) => {
   knex.select().from('users')
     .then(function(rows) {
       res.send(rows);

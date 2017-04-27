@@ -13,8 +13,12 @@ const server = require('http').createServer(app);
 
 
 // app.set('viewengine', 'ejs');
-app.use(express.static('client/public'));
+// app.use(express.static('client/public'));
 // Middleware
+
+app.get('/', (req, res) => {
+  res.send('Hi');
+});
 
 // app.get('/', (req, res) => {
 //   knex.select().from('users')

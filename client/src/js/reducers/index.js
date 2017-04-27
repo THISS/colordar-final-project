@@ -1,6 +1,8 @@
-// import {combineReducers} from 'redux';
-// import TestReducer from './reducer-test';
+import {combineReducers} from 'redux';
+import EventReducer from './reducer-events';
 
-// const allReducers = combineReducers({
-//   test: TestReducer
-// });
+const allReducers = combineReducers({
+  events: EventReducer
+});
+
+export default allReducers;

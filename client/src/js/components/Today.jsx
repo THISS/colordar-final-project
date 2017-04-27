@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import TodayList from './TodayList.jsx';
 import Nav from './Nav.jsx';
 import Calendar from './Calendar.jsx';
+import EventList from '../containers/event-list';
+import moment from 'moment';
 
 class Today extends Component {
+
   render() {
+
+    const now = moment().format("MMMM Do, YYYY");
+
     return (
       <div className="container">
 
@@ -12,11 +17,11 @@ class Today extends Component {
 
         <div className="row">
           <div className="col-sm-4 col-sm-offset-4 text-center">
-            <h3 className="current-date">April 25th, 2017</h3>
+            <h3 className="current-date">{now}</h3>
           </div>
         </div>
 
-        <section className="today-container">
+        <section>
           <div className="row">
             <div className="col-sm-1">
               <h5>Today</h5>
@@ -27,14 +32,13 @@ class Today extends Component {
           </div>
 
           <div className="today-event-container">
-            <TodayList todayEvents={this.props.todayEvents} />
+            <EventList />
           </div>
         </section>
 
         <section>
-          <Calendar />
+          <Calendar events={this.props.events}/>
         </section>
-
       </div>
     );
   }

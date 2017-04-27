@@ -1,6 +1,5 @@
 'use strict';
 
-
 const ENV = process.env.ENV || 'development';
 if (ENV === 'development') {
   require('dotenv').config();
@@ -18,15 +17,15 @@ const server = require('http').createServer(app);
 app.use(express.static('client/public'));
 // Middleware
 
-app.get('/', (req, res) => {
-  knex.select().from('users')
-    .then(function(rows) {
-      res.send(rows);
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-});
+// app.get('/', (req, res) => {
+//   knex.select().from('users')
+//     .then(function(rows) {
+//       res.send(rows);
+//     })
+//     .catch(function(err) {
+//       console.log(err);
+//     });
+// });
 
 // TODO: inject our knex into dbhelpers
 
@@ -41,5 +40,5 @@ app.get('/', (req, res) => {
 // TODO: Create a Events route
 
 server.listen(PORT, () => {
-  console.log(`Colordar is Online: http://localhost on port ${server.address().port}`);
+  console.log(`Colordar is Online: https://colordar.herokuapp.com on port ${server.address().port}`);
 })

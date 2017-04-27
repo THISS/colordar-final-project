@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const ENV = process.env.ENV || 'development';
+const ENV = process.env.NODE_ENV || 'development';
 
 const PORT = process.env.PORT || 8080;
 const express = require('express');
@@ -12,8 +12,6 @@ const server = require('http').createServer(app);
 
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[ENV]);
-
-console.log(process.env.DATABASE_URL); // remove when ready
 
 // app.set('viewengine', 'ejs');
 app.use(express.static('client/public'));

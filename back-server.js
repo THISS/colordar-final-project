@@ -1,17 +1,31 @@
 'use strict';
+
+require('dotenv').config();
+
 const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-app.set('viewengine', 'ejs');
-/* Uncomment when testing live version */
-app.use(express.static('client/public'));
+const knexConfig = require('./knexfile.js');
+const knex = require('knex')(knexConfig[ENV]);
+
+
+// app.set('viewengine', 'ejs');
+// app.use(express.static('client/public'));
 // Middleware
 
 app.get('/', (req, res) => {
-  res.send('Hey there');
+  knex.select().from('users')
+    .then(function(rows) {
+      res.send(rows);
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 });
+
 // TODO: inject our knex into dbhelpers
 
 // TODO: inject dbhelpers into our routes

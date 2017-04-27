@@ -30,6 +30,7 @@
     "knex": "^0.12.9",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
+    "pg": "^6.1.5",
     "react": "^15.5.4",
     "react-big-calendar": "^0.13.0",
     "react-dom": "^15.5.4",
@@ -42,6 +43,7 @@
     "webpack": "^2.4.1"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "webpack-dev-server": "^2.4.4"
   }
 }

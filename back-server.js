@@ -1,15 +1,17 @@
 'use strict';
 
-require('dotenv').config();
 
+const ENV = process.env.ENV || 'development';
+if (ENV === 'development') {
+  require('dotenv').config();
+}
 const PORT = process.env.PORT || 8080;
-const ENV = process.env.ENV || "development";
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-const knexConfig = require('./knexfile.js');
-const knex = require('knex')(knexConfig[ENV]);
+// const knexConfig = require('./knexfile.js');
+// const knex = require('knex')(knexConfig[ENV]);
 
 
 // app.set('viewengine', 'ejs');

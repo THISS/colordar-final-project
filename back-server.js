@@ -10,8 +10,8 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-// const knexConfig = require('./knexfile.js');
-// const knex = require('knex')(knexConfig[ENV]);
+const knexConfig = require('./knexfile.js');
+const knex = require('knex')(knexConfig[ENV]);
 
 
 // app.set('viewengine', 'ejs');
@@ -19,18 +19,14 @@ const server = require('http').createServer(app);
 // Middleware
 
 app.get('/', (req, res) => {
-  res.send('Hi');
+  knex.select().from('users')
+    .then(function(rows) {
+      res.send(rows);
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 });
-
-// app.get('/', (req, res) => {
-//   knex.select().from('users')
-//     .then(function(rows) {
-//       res.send(rows);
-//     })
-//     .catch(function(err) {
-//       console.log(err);
-//     });
-// });
 
 // TODO: inject our knex into dbhelpers
 

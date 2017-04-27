@@ -3,5 +3,10 @@
 yarn remove node-sass
 yarn add node-sass@latest
 webpack -p --config ./webpack.prod.config.js --progress
-# node_modules/.bin/knex migrate:latest
-# node_modules/.bin/knex seed:run
+echo "rollback DB"
+node_modules/.bin/knex migrate:rollback
+echo "migrate latest DB"
+node_modules/.bin/knex migrate:latest
+echo "seed DB"
+node_modules/.bin/knex seed:run
+echo "post setup complete"

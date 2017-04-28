@@ -30,7 +30,8 @@ exports.up = function(knex, Promise) {
       table.integer('user_id')
         .unsigned()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       table.string('name')
         .notNullable();
       table.timestamps(true, true);
@@ -52,7 +53,8 @@ exports.up = function(knex, Promise) {
       table.integer('calendar_id')
         .unsigned()
         .references('id')
-        .inTable('calendars');
+        .inTable('calendars')
+        .onDelete('CASCADE');
       table.integer('color_id')
         .unsigned()
         .references('id')
@@ -71,11 +73,13 @@ exports.up = function(knex, Promise) {
       table.integer('user_id')
         .unsigned()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       table.integer('calendar_id')
         .unsigned()
         .references('id')
-        .inTable('calendars');
+        .inTable('calendars')
+        .onDelete('CASCADE');
       table.boolean('merged')
         .notNullable();
 
@@ -86,11 +90,13 @@ exports.up = function(knex, Promise) {
       table.integer('user_id')
         .unsigned()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       table.integer('group_id')
         .unsigned()
         .references('id')
-        .inTable('groups');
+        .inTable('groups')
+        .onDelete('CASCADE');
       
       table.primary(['user_id', 'group_id']);
     }),
@@ -99,11 +105,13 @@ exports.up = function(knex, Promise) {
       table.integer('group_id')
         .unsigned()
         .references('id')
-        .inTable('groups');
+        .inTable('groups')
+        .onDelete('CASCADE');
       table.integer('calendar_id')
         .unsigned()
         .references('id')
-        .inTable('calendars');
+        .inTable('calendars')
+        .onDelete('CASCADE');
       
       table.primary(['group_id', 'calendar_id']);
     })

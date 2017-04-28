@@ -3,6 +3,11 @@ import fullcalendar from 'fullcalendar';
 import moment from 'moment';
 import $ from 'jquery';
 
+// connect to redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+
 class Calendar extends Component {
 
   componentDidMount() {
@@ -21,9 +26,16 @@ class Calendar extends Component {
 
   render() {
     return (
-      <div ref="calendar"></div>
+      <div ref="calendar" className="calendar"></div>
     );
   }
 }
 
-export default Calendar;
+// Send a piece of state from your store to your component as props
+function mapStateToProps(state) {
+  return {
+    events: state.events
+  };
+}
+
+export default connect(mapStateToProps)(Calendar);

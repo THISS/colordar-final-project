@@ -37,7 +37,7 @@ class Today extends Component {
         </section>
 
         <section>
-          <Calendar events={this.props.events}/>
+          <Calendar />
         </section>
       </div>
     );

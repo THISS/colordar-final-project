@@ -1,3 +1,25 @@
 .calendar {
   margin-top:4rem;
 }
+
+.modal {
+  display:none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.close {
+  color:red;
+  width:40px;
+}
+
+.active {
+  display:block;
+}
+
+.event-active {
+  background-color: blue;
+}
+
+.ReactModal__Overlay {
+  z-index: 1000; 
+}

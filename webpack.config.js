@@ -5,6 +5,7 @@ var path = require('path');
 module.exports = {
   devtool: debug ? "inline-sourcemap" : false,
   entry: [
+    "webpack-dev-server/client?http://localhost:3000",
     "./client/src/index.js"
   ],
   output: {

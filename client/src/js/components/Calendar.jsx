@@ -3,8 +3,9 @@ import fullcalendar from 'fullcalendar';
 import moment from 'moment';
 import $ from 'jquery';
 
-import EventModal from './EventModal.jsx';
 import Modal from 'react-modal';
+
+import { addEvent } from '../actions/index'
 
 // connect to redux
 import {bindActionCreators} from 'redux';
@@ -31,7 +32,6 @@ class Calendar extends Component {
     };
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
@@ -39,12 +39,10 @@ class Calendar extends Component {
     this.setState({modalIsOpen: true});
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
   closeModal() {
+    // this.props.addEvent({
+    //
+    // });
     this.setState({modalIsOpen: false});
   }
 
@@ -52,12 +50,15 @@ class Calendar extends Component {
     const {calendar} = this.refs;
 
     $(calendar).fullCalendar({
-      events: this.props.events, editable: true, selectable: true
+      events: this.props.events,
+      editable: true,
+      selectable: true,
 
-      // dayClick: function(date, jsEvent, view) {
-      //   $(this).toggleClass('event-active');
-      //   $('.modal').toggleClass('active');
-      // }
+      dayClick: (date, jsEvent, view) => {
+        this.setState({
+          modalIsOpen: true
+        })
+      }
     });
   }
 
@@ -71,26 +72,19 @@ class Calendar extends Component {
     return (
       <div>
         <div ref="calendar" className="calendar">
-          <EventModal/>
+
+          <div>
+            <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
+              <h2>Add an event</h2>
+              <form>
+                <input/>
+                <button>Submit</button>
+              </form>
+              <button onClick={this.closeModal}>close</button>
+            </Modal>
+          </div>
+
         </div>
-
-        <div>
-          <button onClick={this.openModal}>Open Modal</button>
-          <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
-
-            <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-            <button onClick={this.closeModal}>close</button>
-            <div>I am a modal</div>
-            <form>
-              <input/>
-              <button>tab navigation</button>
-              <button>stays</button>
-              <button>inside</button>
-              <button>the modal</button>
-            </form>
-          </Modal>
-        </div>
-
       </div>
     );
   }

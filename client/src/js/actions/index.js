@@ -6,3 +6,10 @@ export const selectEvent = (event) => {
     payload: event
   }
 };
+
+export const addEvent = (event) => {
+  return {
+    type: "EVENT_ADDED",
+    payload: event
+  }
+}

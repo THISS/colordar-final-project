@@ -13,7 +13,6 @@ const server = require('http').createServer(app);
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[ENV]);
 
-// app.set('viewengine', 'ejs');
 app.use(express.static('client/public'));
 // Middleware
 

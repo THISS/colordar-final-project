@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
-import BigCalendar from 'react-big-calendar';
+import fullcalendar from 'fullcalendar';
 import moment from 'moment';
-
-BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
+import $ from 'jquery';
 
 class Calendar extends Component {
 
+  componentDidMount() {
+    const {calendar} = this.refs;
+
+    $(calendar).fullCalendar({
+      events: this.props.events
+    });
+  }
+
+  componentWillUnmount() {
+    const {calendar} = this.refs;
+
+    $(calendar).fullCalendar('destroy');
+  }
+
   render() {
     return (
-      <div className="calendar">
-        <BigCalendar
-          selectable
-          popup
-          onSelectEvent={event => alert(event.title)}
-
-          events={this.props.events}
-          startAccessor='start'
-          endAccessor='end'
-          views={['month', 'week', 'day']}
-        />
-      </div>
+      <div ref="calendar"></div>
     );
   }
 }

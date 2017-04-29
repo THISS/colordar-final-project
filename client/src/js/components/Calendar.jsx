@@ -1,26 +1,98 @@
 import React, {Component} from 'react';
-import BigCalendar from 'react-big-calendar';
+import fullcalendar from 'fullcalendar';
 import moment from 'moment';
+import $ from 'jquery';
 
-BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
+import Modal from 'react-modal';
+
+import { addEvent } from '../actions/index'
+
+// connect to redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class Calendar extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    // this.props.addEvent({
+    //
+    // });
+    this.setState({modalIsOpen: false});
+  }
+
+  componentDidMount() {
+    const {calendar} = this.refs;
+
+    $(calendar).fullCalendar({
+      events: this.props.events,
+      editable: true,
+      selectable: true,
+
+      dayClick: (date, jsEvent, view) => {
+        this.setState({
+          modalIsOpen: true
+        })
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    const {calendar} = this.refs;
+
+    $(calendar).fullCalendar('destroy');
+  }
+
   render() {
     return (
-      <div className="calendar">
-        <BigCalendar
-          selectable
-          onSelectEvent={event => alert(event.title)}
+      <div>
+        <div ref="calendar" className="calendar">
 
-          events={this.props.events}
-          startAccessor='start'
-          endAccessor='end'
-          views={['month', 'week', 'day']}
-        />
+          <div>
+            <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
+              <h2>Add an event</h2>
+              <form>
+                <input/>
+                <button>Submit</button>
+              </form>
+              <button onClick={this.closeModal}>close</button>
+            </Modal>
+          </div>
+
+        </div>
       </div>
     );
   }
 }
 
-export default Calendar;
+// Send a piece of state from your store to your component as props
+function mapStateToProps(state) {
+  return {events: state.events};
+}
+
+export default connect(mapStateToProps)(Calendar);

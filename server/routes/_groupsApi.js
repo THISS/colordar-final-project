@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = function(dbHelpers) {
+module.exports = function(db) {
   
   router.get('/',(req, res) => {
     res.send('in the groupsApi');

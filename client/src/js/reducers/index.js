@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import EventReducer from './reducer-events';
 
 const allReducers = combineReducers({

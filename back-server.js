@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 8080;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const Winston = require('winston');
+const winstonConfig = require('./winstonconfig');
+const logger = new Winston.Logger(winstonConfig(Winston));
 
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[ENV]);

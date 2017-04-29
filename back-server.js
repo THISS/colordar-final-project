@@ -4,39 +4,39 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const ENV = process.env.NODE_ENV || 'development';
+const path = require('path');
 
 const PORT = process.env.PORT || 8080;
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
+const Winston = require('winston');
+const winstonConfig = require('./winstonconfig');
+const logger = new Winston.Logger(winstonConfig(Winston));
+
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[ENV]);
 
-app.use(express.static('client/public'));
+
 // Middleware
 
-app.get('/dbase', (req, res) => {
-  knex.select().from('users')
-    .then(function(rows) {
-      res.send(rows);
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
+app.use(express.static('client/public'));
+
+// Inject our knex into dbhelpers
+const dbHelpers = require('./server/db/helpers');
+
+// Routes
+// Load the routers with the dbHelpers where needed
+const apiRoutes = require('./server/routes/apiRoutes')(dbHelpers);
+
+// Mount the routers
+app.use('/api', apiRoutes);
+
+// Our catch all that will send the index file to client - TODO:can change to 404 at some point
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/public/index.html'));
 });
-
-// TODO: inject our knex into dbhelpers
-
-// TODO: inject dbhelpers into our routes
-
-// TODO: Create a users route
-
-// TODO: Create a Calendars route
-
-// TODO: Create a Groups route
-
-// TODO: Create a Events route
 
 server.listen(PORT, () => {
   console.log(`Colordar is Online: https://colordar.herokuapp.com on port ${server.address().port}`);

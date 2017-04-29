@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Redux imports
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import allReducers from './reducers';
 
 // Our component imports
@@ -34,7 +34,7 @@ const store = createStore(allReducers, applyMiddleware(logger));
 // ReactDOM.render(<App data={FakeData}/>, document.getElementById('react-root'));
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={ store }>
     <App />
   </Provider>
   , document.getElementById('react-root'));

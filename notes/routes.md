@@ -219,7 +219,7 @@ response: {
   }]
 }
 ```
-- `PUT - /events` - Submits the event data to create a new event
+- `POST - /events` - Submits the event data to create a new event
 ```
 request: {
   name: 'String of event name',
@@ -230,7 +230,7 @@ request: {
   color: colorCode
 }
 
-response: {errors: ['an','array','of','errors']}
+response: {id: eventId, errors: ['an','array','of','errors']}
 ```
 - `GET - /events/:id` - Returns the data of a specific event
 ```
@@ -259,4 +259,10 @@ request: {
 }
 
 response: {errors: ['an','array','of','errors']}
+```
+- `DELETE - /events/:id` - Submits the data of a specific event and updates the event 
+```
+request: no data given
+
+response: {deleted: boolean || undefined, errors: ['an','array','of','errors'] || undefined}
 ```

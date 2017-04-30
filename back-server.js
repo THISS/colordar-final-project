@@ -24,7 +24,7 @@ const knex = require('knex')(knexConfig[ENV]);
 app.use(express.static('client/public'));
 
 // Inject our knex into dbhelpers
-const dbHelpers = require('./server/db/helpers');
+const dbHelpers = require('./server/db/helpers')(knex);
 
 // Routes
 // Load the routers with the dbHelpers where needed

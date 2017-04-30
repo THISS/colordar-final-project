@@ -43,49 +43,69 @@ module.exports = function(db) {
   });
 
   router.post('/', (req, res) => {
+    // Get the input from the body as JSON TODO:
     const eventInput = {
       name: 'darts at mine',
       location: 'my house',
       start_time: '2017-04-29T23:07:20.184Z',
       end_time: '2017-04-29T23:07:20.184Z',
       calendar_id: 2,
-      color_code: 'primary'
+      color_id: 3
     };
     
-
-
-    // response: {
-    //   id: (dbIdOfEvent || undefined), 
-    //   errors: (['an','array','of','errors'] || undefined)
-    // }
+    db.addEvent(eventInput)
+      .then((queryResponse) => {
+        res.json(queryResponse);
+      })
+      .catch((error) => {
+        errorHandler(error, res);
+      });
   });
 
   router.get('/:id', (req, res) => {
-    // response: {
-    //   id: eventId,
-    //   name: 'String of event name',
-    //   location: 'String of event location',
-    //   start: unixTimestamp of start time,
-    //   end: unixTimestamp of end time,
-    //   calendarId: calendar_id,
-    //   color: colorCode
-    // }
+    const eventId = req.params.id;
+
+    db.getEventById(eventId)
+      .then((queryResponse) => {
+        res.json(queryResponse);
+      })
+      .catch((error) => {
+        errorHandler(error, res);
+      });
   });
 
   router.put('/:id', (req, res) => {
-    // request: {
-    //   id: eventId,
-    //   name: 'String of event name',
-    //   location: 'String of event location',
-    //   start: unixTimestamp of start time,
-    //   end: unixTimestamp of end time,
-    //   calendarId: calendar_id,
-    //   color: colorCode
-    // }
+    const eventId = req.params.id;
+    // TODO: replace with body of PUT
+    const eventObj = {
+      name: 'Play pool',
+      location: 'Johns Place',
+      start_time: '2017-04-29T23:07:20.184Z',
+      end_time: '2017-04-29T23:07:20.184Z',
+      calendar_id: 2,
+      color_id: 2
+    };
 
-    // response: {errors: ['an','array','of','errors']}
+    db.updateEvent(eventId, eventObj)
+      .then((queryResponse) => {
+        // queryResponse return an array of updated rows - we just changed 1
+        res.json(queryResponse[0]);
+      })
+      .catch((error) => {
+        errorHandler(error, res);
+      });
   });
 
+  router.delete('/:id', (req, res) => {
+    const eventId = req.params.id;
+    db.deleteEvent(eventId)
+      .then((success) => {
+        res.json({deleted: true});
+      })
+      .catch((error) => {
+        errorHandler(error, res);
+      });
+  })
 
   return router;
 }

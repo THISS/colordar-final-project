@@ -1,19 +1,42 @@
 // events table
 module.exports = function(knex) {
   // functions for the database go here
-  const getUsersCalendars = (userId) => {
+  const addEvent = (eventObj) => {
+    return knex.insert(eventObj, 'id')
+      .into('events');
+  };
+
+  const deleteEvent = (eventId) => {
+    return knex.del()
+      .from('events')
+      .where({id: eventId});
+  };
+
+  const getAllCalendarEvents = (calendarId) => {
     return knex.select(
-      'calendars.id',
+      'events.id',
+      'color_id',
       'name',
-      'color_code',
-      'merged'
-      )
-      .from('calendars')
-      .innerJoin('colors', 'colors.id', '=', 'calendars.color_id')
-      .innerJoin('master_calendars', 'calendars.id', '=', 'master_calendars.calendar_id')
-      .where({
-        'calendars.user_id': userId
-      })
+      'start_time',
+      'end_time',
+      'location'
+    )
+      .from('events')
+      .where({ calendar_id: calendarId });
+  };
+
+  const getEventById = (eventId) => {
+    return knex.first(
+      'id',
+      'color_id',
+      'calendar_id',
+      'name',
+      'start_time',
+      'end_time',
+      'location'
+    )
+    .from('events')
+    .where({id: eventId});
   };
 
   const getMasterCalendarEvents = (userId) => {
@@ -21,7 +44,7 @@ module.exports = function(knex) {
     // need to get all events where the calendar_id is in the calendar ids
     return knex.select(
       'events.id',
-      'color_code',
+      'color_id',
       'events.calendar_id',
       'name',
       'start_time',
@@ -29,7 +52,6 @@ module.exports = function(knex) {
       'location'
     )
       .from('events')
-      .innerJoin('colors', 'colors.id', '=', 'events.color_id')
       .innerJoin('master_calendars', 'events.calendar_id', '=', 'master_calendars.calendar_id')
       .innerJoin('users', 'master_calendars.user_id', '=', 'users.id')
       .where({
@@ -38,31 +60,43 @@ module.exports = function(knex) {
       });
   };
 
-  const getAllCalendarEvents = (calendarId) => {
+  const getUsersCalendars = (userId) => {
     return knex.select(
-      'events.id',
-      'color_code',
+      'calendars.id',
       'name',
-      'start_time',
-      'end_time',
-      'location'
-    )
-      .from('events')
-      .innerJoin('colors', 'colors.id', '=', 'events.color_id')
-      .where({ calendar_id: calendarId });
+      'color_id',
+      'merged'
+      )
+      .from('calendars')
+      .innerJoin('master_calendars', 'calendars.id', '=', 'master_calendars.calendar_id')
+      .where({
+        'calendars.user_id': userId
+      });
   };
 
-  // const masterCalendarEvents = () => {};
-  // const masterCalendarEvents = () => {};
-  // const masterCalendarEvents = () => {};
-  // const masterCalendarEvents = () => {};
-  // const masterCalendarEvents = () => {};
-  // const masterCalendarEvents = () => {};
-
+  const updateEvent = (eventId, eventObj) => {
+    return knex('events')
+      .update(eventObj)
+      .where({id: eventId})
+      .returning([
+          'id',
+          'color_id',
+          'calendar_id',
+          'name',
+          'start_time',
+          'end_time',
+          'location'
+        ]
+      );
+  };
 
   return {
+    addEvent,
+    deleteEvent,
     getAllCalendarEvents,
+    getEventById,
     getMasterCalendarEvents,
-    getUsersCalendars
+    getUsersCalendars,
+    updateEvent
   };
 }

@@ -2,7 +2,7 @@
 module.exports = function(knex) {
   // functions for the database go here
   const addEvent = (eventObj) => {
-    return knex.insert(eventObj, 'id')
+    return knex.insert(eventObj, ['id', 'color_id', 'calendar_id', 'name', 'start_time', 'end_time', 'location'])
       .into('events');
   };
 

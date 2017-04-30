@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = function(dbHelpers) {
   // Gather the api routers
   const users = require('./_usersApi')(dbHelpers.users);
-  const calendars = require('./_calendarsApi')(dbHelpers.calendars);
+  const calendars = require('./_calendarsApi')(dbHelpers);
   const groups = require('./_groupsApi')(dbHelpers.groups);
   const events = require('./_eventsApi')(dbHelpers.events);
   

@@ -55,7 +55,7 @@ module.exports = function(db) {
     
     db.addEvent(eventInput)
       .then((queryResponse) => {
-        res.json(queryResponse);
+        res.json(queryResponse[0]);
       })
       .catch((error) => {
         errorHandler(error, res);
@@ -64,6 +64,9 @@ module.exports = function(db) {
 
   router.get('/:id', (req, res) => {
     const eventId = req.params.id;
+    if (!eventId) {
+      errorHandler('no eventId given', res);
+    }
 
     db.getEventById(eventId)
       .then((queryResponse) => {
@@ -76,6 +79,9 @@ module.exports = function(db) {
 
   router.put('/:id', (req, res) => {
     const eventId = req.params.id;
+    if (!eventId) {
+      errorHandler('no eventId given', res);
+    }
     // TODO: replace with body of PUT
     const eventObj = {
       name: 'Play pool',
@@ -98,6 +104,9 @@ module.exports = function(db) {
 
   router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
+    if (!eventId) {
+      errorHandler('no eventId given', res);
+    }
     db.deleteEvent(eventId)
       .then((success) => {
         res.json({deleted: true});

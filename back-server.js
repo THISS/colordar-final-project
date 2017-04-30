@@ -1,9 +1,9 @@
 'use strict';
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
 
 const ENV = process.env.NODE_ENV || 'development';
+if (ENV !== 'production') {
+  require('dotenv').config();
+}
 const path = require('path');
 
 const PORT = process.env.PORT || 8080;
@@ -20,6 +20,11 @@ const knex = require('knex')(knexConfig[ENV]);
 
 
 // Middleware
+if (ENV !== 'production') {
+  // Dev only
+  const knexLogger  = require('knex-logger');
+  app.use(knexLogger(knex));
+}
 
 app.use(express.static('client/public'));
 

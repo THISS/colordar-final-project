@@ -25,8 +25,8 @@ module.exports = function(db) {
     const userId = 1; // TODO:
     const responseObj = {};
 
-    const calendarInput =  {
-      user_id: userId,
+    const calendarInput =  { // TODO:
+      owner_id: userId,
       name: 'Baking Club',
       color_id: 2
     };

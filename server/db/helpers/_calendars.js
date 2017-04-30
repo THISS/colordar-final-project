@@ -13,7 +13,7 @@ module.exports = function(knex) {
       'color_id'
     )
     .from('calendars')
-    .where({user_id: userId});
+    .where({owner_id: userId});
   };
 
   const getCalendarById = (calendarId) => {

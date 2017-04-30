@@ -45,6 +45,7 @@
     "redux-form": "^6.6.3",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
+    "uuid": "^3.0.1",
     "webpack": "^2.4.1",
     "winston": "^2.3.1"
   },

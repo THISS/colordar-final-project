@@ -5,14 +5,13 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('users', function(table) {
       table.increments('id');
       table.string('email', 127)
-        .notNullable();
+        .notNullable()
+        .unique();
       table.string('password_digest')
         .notNullable();
       table.string('first_name', 63)
         .notNullable();
       table.string('profile_image_url');
-      
-      table.unique('email');
     }),
 
     knex.schema.createTableIfNotExists('colors', function(table) {
@@ -27,7 +26,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .references('id')
         .inTable('colors');
-      table.integer('user_id')
+      table.integer('owner_id')
         .unsigned()
         .references('id')
         .inTable('users')
@@ -43,6 +42,10 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .references('id')
         .inTable('colors');
+      table.integer('owner_id')
+        .unsigned()
+        .references('id')
+        .inTable('users');
       table.string('name')
         .notNullable();
       table.timestamps(true, true);
@@ -114,6 +117,34 @@ exports.up = function(knex, Promise) {
         .onDelete('CASCADE');
       
       table.primary(['group_id', 'calendar_id']);
+    }),
+
+    knex.schema.createTableIfNotExists('track_users_groups', function(table) {
+      table.increments('id');
+      table.integer('inviter_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .notNullable();
+      table.integer('group_id')
+        .unsigned()
+        .references('id')
+        .inTable('groups')
+        .onDelete('CASCADE')
+        .notNullable();
+      table.string('added_user_email', 127)
+        .references('email')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .notNullable();
+      table.string('uurl')
+        .notNullable();
+      table.boolean('token_used')
+        .notNullable();
+      table.timestamps(true,true);
+
+      table.unique(['added_user_email', 'group_id', 'token_used'])
     })
   ]);
 
@@ -121,6 +152,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
+    knex.schema.dropTableIfExists('track_users_groups'),
     knex.schema.dropTableIfExists('groups_calendars'),
     knex.schema.dropTableIfExists('users_groups'),
     knex.schema.dropTableIfExists('master_calendars'),

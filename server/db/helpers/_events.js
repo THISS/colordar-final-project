@@ -70,7 +70,7 @@ module.exports = function(knex) {
       .from('calendars')
       .innerJoin('master_calendars', 'calendars.id', '=', 'master_calendars.calendar_id')
       .where({
-        'calendars.user_id': userId
+        'calendars.owner_id': userId
       });
   };
 

@@ -11,7 +11,7 @@ module.exports = function(db) {
   router.get('/',(req, res) => {
     const calId = req.query.calid;
     const isMaster = req.query.ismaster;
-    const userId = 1; // TODO: add the users id here
+    const userId = 2; // TODO: add the users id here
     const responseObj = {};
 
     if (isMaster) {

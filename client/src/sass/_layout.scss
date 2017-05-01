@@ -1,16 +1,31 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html {
-  font-size: 20px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 body {
-  padding-top: 70px;
   list-style-type: none;
-  background-color: #353559;
-  color: white;
+  background-color: $background-color-light;
+  color: $body-font;
+  font-size: 1rem;
   font-family: 'Montserrat', sans-serif;
 }
 
-h3.current-date {
-  font-size: 1rem;
-  text-transform: uppercase;
+.container {
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+  margin: 0 auto;
+}
+
+button {
+  background-color: $button-color;
+  font-weight: 300;
+  border: none;
+  border-radius: 40px;
+  color: $body-font;
 }

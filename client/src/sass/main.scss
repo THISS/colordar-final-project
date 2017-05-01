@@ -1,8 +1,13 @@
 // this is the file for importing all other sass files
 // in order
+@import './vendors/normalize';
+@import './vendors/skeleton';
+
 @import 'variables';
 @import 'normalize';
 @import 'layout';
 @import 'today';
-// @import 'fullcalendar-default';
+@import 'nav';
+@import 'todayevents';
+
 @import 'fullcalendar-custom';

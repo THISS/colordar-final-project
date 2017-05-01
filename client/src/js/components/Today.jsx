@@ -1,44 +1,29 @@
 import React, {Component} from 'react';
 import Nav from './Nav.jsx';
 import Calendar from './Calendar.jsx';
-import EventList from '../containers/event-list';
+import TodayEvents from './TodayEvents.jsx';
 import moment from 'moment';
 
 export default class Today extends Component {
 
   render() {
 
-    const now = moment().format("MMMM Do, YYYY");
+    const now = moment().format("DD MMMM YYYY");
+    const nowDay = moment().format("dddd");
 
     return (
       <div className="container">
-
         <Nav />
 
-        <div className="row">
-          <div className="col-sm-4 col-sm-offset-4 text-center">
-            <h3 className="current-date">{now}</h3>
-          </div>
+        <TodayEvents />
+
+        <div className="date-section">
+          <h5>It's {nowDay}.</h5>
+          <p className="current-date">{now}</p>
         </div>
 
-        <section>
-          <div className="row">
-            <div className="col-sm-1">
-              <h5>Today</h5>
-            </div>
-            <div className="col-sm-3">
-              <button className="btn btn-default">+ Add an event</button>
-            </div>
-          </div>
 
-          <div className="today-event-container">
-            <EventList />
-          </div>
-        </section>
-
-        <section>
-          <Calendar />
-        </section>
+        <Calendar />
       </div>
     );
   }

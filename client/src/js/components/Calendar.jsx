@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
 import fullcalendar from 'fullcalendar';
+import 'fullcalendar/dist/fullcalendar.css';
+
+import 'react-dates/lib/css/_datepicker.css';
+
 import moment from 'moment';
 import $ from 'jquery';
-
 import Modal from 'react-modal';
+
+import EventForm from './EventForm.jsx';
+import SelectCalendar from './SelectCalendar.jsx';
 
 import { addEvent } from '../actions/index'
 
@@ -76,15 +82,16 @@ class Calendar extends Component {
           <div>
             <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
               <h2>Add an event</h2>
-              <form>
-                <input/>
-                <button>Submit</button>
-              </form>
+
+              <EventForm />
+
               <button onClick={this.closeModal}>close</button>
             </Modal>
           </div>
 
         </div>
+
+        <SelectCalendar />
       </div>
     );
   }

@@ -5,4 +5,12 @@ html {
 body {
   padding-top: 70px;
   list-style-type: none;
+  background-color: #353559;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h3.current-date {
+  font-size: 1rem;
+  text-transform: uppercase;
 }

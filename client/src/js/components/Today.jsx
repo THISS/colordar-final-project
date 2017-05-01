@@ -4,7 +4,7 @@ import Calendar from './Calendar.jsx';
 import EventList from '../containers/event-list';
 import moment from 'moment';
 
-class Today extends Component {
+export default class Today extends Component {
 
   render() {
 
@@ -43,5 +43,3 @@ class Today extends Component {
     );
   }
 }
-
-export default Today;

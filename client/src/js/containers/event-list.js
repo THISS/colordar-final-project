@@ -1,20 +1,21 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {selectEvent} from '../actions/index';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { selectEvent } from '../actions/event-actions';
 import moment from 'moment';
 
 class EventList extends Component {
 
   createListItems() {
     return this.props.events.map((event) => {
+      // TODO: make this date dynamic
       if (moment(event.start).isSame('2017-4-25', 'day')){
         return (
           <li
-            key={event.id}
+            key={ event.id }
             onClick={() => this.props.selectEvent(event)}
           >
-            {moment(event.start).format('LT')} - {event.title}
+            {moment(event.start).format('LT')} - { event.title }
           </li>
         );
       }
@@ -39,6 +40,7 @@ function mapStateToProps(state) {
 
 //
 function mapDispatchToProps(dispatch) {
+  //TODO: Neccessary?..below
   return bindActionCreators({selectEvent: selectEvent}, dispatch)
 }
 

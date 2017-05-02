@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import fullcalendar from 'fullcalendar';
 import moment from 'moment';
 import $ from 'jquery';
 
 import Modal from 'react-modal';
 
-import { addEvent } from '../actions/index'
+import { addEvent } from '../actions/event-actions';
 
 // connect to redux
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const customStyles = {
   content: {
@@ -36,10 +36,11 @@ class Calendar extends Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
+    // TODO: is this needed..
     // this.props.addEvent({
     //
     // });
@@ -47,7 +48,7 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    const {calendar} = this.refs;
+    const { calendar } = this.refs;
 
     $(calendar).fullCalendar({
       events: this.props.events,
@@ -55,36 +56,38 @@ class Calendar extends Component {
       selectable: true,
 
       dayClick: (date, jsEvent, view) => {
-        this.setState({
-          modalIsOpen: true
-        })
+        this.openModal();
       }
     });
   }
 
   componentWillUnmount() {
-    const {calendar} = this.refs;
+    const { calendar } = this.refs;
 
     $(calendar).fullCalendar('destroy');
   }
 
   render() {
     return (
-      <div>
-        <div ref="calendar" className="calendar">
+      <div ref="calendar" className="calendar">
 
-          <div>
-            <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
-              <h2>Add an event</h2>
-              <form>
-                <input/>
-                <button>Submit</button>
-              </form>
-              <button onClick={this.closeModal}>close</button>
-            </Modal>
-          </div>
+        <div>
+          <Modal 
+            isOpen={ this.state.modalIsOpen } 
+            onRequestClose={ this.closeModal } 
+            style={ customStyles} 
+            contentLabel="Add an Event">
 
+            <h2>Add an event</h2>
+            <form>
+              <input/>
+              <button>Submit</button>
+            </form>
+            <button onClick={this.closeModal}>Close</button>
+
+          </Modal>
         </div>
+
       </div>
     );
   }

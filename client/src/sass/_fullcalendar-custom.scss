@@ -1,5 +1,6 @@
-.calendar {
-  margin-top:4rem;
+.calendar-container {
+  position: absolute;
+  right:-70rem;
 }
 
 .modal {
@@ -21,5 +22,5 @@
 }
 
 .ReactModal__Overlay {
-  z-index: 1000; 
+  z-index: 1000;
 }

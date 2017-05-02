@@ -2,26 +2,26 @@ const defaultState = [
   {
     "id": 1,
     "title": "Brunch with mom",
-    "start": new Date(2017, 3, 25, 10, 0),
-    "end": new Date(2017, 3, 25, 11, 30)
+    "start": new Date(2017, 4, 1, 10, 0),
+    "end": new Date(2017, 4, 1, 11, 30)
   },
   {
     "id": 2,
     "title": "Meeting at work",
-    "start": new Date(2017, 3, 25, 12, 30),
-    "end": new Date(2017, 3, 25, 14, 30)
+    "start": new Date(2017, 4, 1, 12, 30),
+    "end": new Date(2017, 4, 1, 14, 30)
   },
   {
     "id": 3,
     "title": "Drinks with Jeff and Batman",
-    "start": new Date(2017, 3, 25, 17, 0),
-    "end": new Date(2017, 3, 25, 18, 30)
+    "start": new Date(2017, 4, 1, 17, 0),
+    "end": new Date(2017, 4, 1, 18, 30)
   },
   {
     "id": 4,
     "title": "Dessert time",
-    "start": new Date(2017, 3, 25, 19, 30),
-    "end": new Date(2017, 3, 25, 20, 30)
+    "start": new Date(2017, 4, 1, 19, 30),
+    "end": new Date(2017, 4, 1, 20, 30)
   },
   {
     "id": 5,

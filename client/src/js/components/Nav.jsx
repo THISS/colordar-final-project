@@ -3,27 +3,18 @@ import React, {Component} from 'react';
 class Nav extends Component {
   render() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">color.</a>
-          </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li className="active"><a href="#">Today</a></li>
-              <li><a href="#calendars">Calendars</a></li>
-              <li><a href="#groups">Groups</a></li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li><a href="#log-out">Log Out</a></li>
-            </ul>
-          </div>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <span className="round-buttons">
+            <i className="fa fa-comments" aria-hidden="true"></i>
+          </span>
+          <span className="round-buttons">
+            <i className="fa fa-search" aria-hidden="true"></i>
+          </span>
+        </div>
+        <div className="navbar-right">
+          <span>Good morning, Harry</span>
+          <img className="profile-img" src="http://kingofwallpapers.com/jake-gyllenhaal/jake-gyllenhaal-003.jpg" />
         </div>
       </nav>
     );

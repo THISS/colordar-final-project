@@ -1,0 +1,64 @@
+.flex-container {
+  display: flex;
+}
+
+.todayevents-container {
+  background-color: $body-font;
+  height: 70%;
+  border-radius: 14px;
+  box-shadow: 0px 2px 2px rgba(104, 104, 104, 0.5);
+  border: 1px solid red;
+  margin-top: 6rem;
+  padding: 4rem 4rem 0 4rem;
+  display: flex;
+
+  button.add-event-btn {
+    margin-top: auto;
+  }
+}
+
+//
+// .today-event-line {
+//   width: 2px;
+//   background: black;
+//   height: 300px;
+//   position: absoute;
+//   margin-left:10rem;
+// }
+
+ul {
+  list-style-type: none;
+
+  li.today-events-list {
+    display: flex;
+    color: #353559;
+    line-height: 10px;
+
+      p.today-event-time {
+        width:5rem;
+        margin-right: 2rem;
+
+      }
+
+      p.today-event-title {
+        margin-left: 3rem;
+      }
+
+    .today-event-seperator {
+      flex-direction: column;
+      justify-content: center;
+
+      .today-event-circle {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background: red;
+      }
+    }
+  }
+}
+
+.todaydate-container {
+  flex-grow: 4;
+  border: 1px solid blue;
+}

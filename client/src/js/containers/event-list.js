@@ -23,13 +23,21 @@ class EventList extends Component {
 
   render(){
     return(
-      <ul>
-        {this.props.events.map(event => (
-          <li key={event.id}>
-            {moment(event.start).format('LT')} - {event.title}
-          </li>)
-        )}
-      </ul>
+      <div>
+        <div className="today-event-line"></div>
+        <ul>
+          {this.props.events.map(event => (
+            <li key={event.id} className="today-events-list">
+              <p className="today-event-time">{moment(event.start).format('LT')}</p>
+              <div className="today-event-seperator">
+                <div className="today-event-circle"></div>
+              </div>
+              <p className="today-event-title">{event.title}</p>
+            </li>
+            )
+          )}
+        </ul>
+      </div>
     );
   }
 }
@@ -39,7 +47,7 @@ function eventsForCurrentDate({ events, currentDate }) {
   // console.log('MapStateToProps for EventList');
   const todaysEvents = events.filter(({start, end}) => {
     // console.log(start, new Date(currentDate));
-    return moment(start).isSameOrAfter(moment(currentDate).startOf('day')) && 
+    return moment(start).isSameOrAfter(moment(currentDate).startOf('day')) &&
       moment(end).isSameOrBefore(moment(currentDate).endOf('day'))
   });
   // console.log(todaysEvents);

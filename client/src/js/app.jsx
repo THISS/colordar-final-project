@@ -8,7 +8,7 @@ import store from './store';
 
 // Our component imports
 import App from './components/App.jsx';
-import FakeData from '../data/fake-data.json';
+
 
 ReactDOM.render(
   <Provider store={ store }>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Nav from './Nav.jsx';
 import Calendar from './Calendar.jsx';
 import EventList from '../containers/event-list';
 import moment from 'moment';
@@ -13,7 +12,6 @@ class Today extends Component {
     return (
       <div className="container">
 
-        <Nav />
 
         <div className="row">
           <div className="col-sm-4 col-sm-offset-4 text-center">

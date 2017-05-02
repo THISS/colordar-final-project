@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-import Today from './Today.jsx';
-import Calendar from './Calendar.jsx';
-import Nav from './Nav.jsx';
-import { Route, Router, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // TODO: need to import the login logout and register components
+
+import Nav from './Nav.jsx';
+import Today from './Today.jsx';
 
 class App extends Component {
   render() {
     return (
-    <Router history={ browserHistory } >
-      <Route path='/register' component={ Register } />
-      <Route path='/login' component={ Login } />
-      <Route component={ ensureLoggedIn } > // TODO: make sure we are passing down the isLoggedIn
-        <Route path='/logout' component={ Logout } />
-        <Route path='/' component={ Today } />
-        <Route path='/today' component={ Today } />
-        <Route path='/groups' component={ Groups } />
-        <Route path='/chat' component={ Chat } />
-      </Route>
-    </ Router>
+      <div>
+        <Router>
+          <div>
+            <Nav />
+            <Route exact path='/' component={ Today } />
+            <Route path='/groups' component={ Today } />
+            <Route path='/chat' component={ Today } />
+          </div>
+        </Router>
+      </div>
     );
   }
 }

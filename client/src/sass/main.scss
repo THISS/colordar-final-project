@@ -1,13 +1,314 @@
 // this is the file for importing all other sass files
 // in order
-@import './vendors/normalize';
-@import './vendors/skeleton';
 
+// @import './vendors/normalize';
+// @import './vendors/skeleton';
+//
 @import 'variables';
-@import 'normalize';
-@import 'layout';
-@import 'today';
-@import 'nav';
-@import 'todayevents';
+// @import 'normalize';
+// @import 'layout';
+// @import 'today';
+// @import 'nav';
+// @import 'todayevents';
+//
+// @import 'fullcalendar-custom';
 
-@import 'fullcalendar-custom';
+// LAYOUT
+body {
+  background: $color-main-light;
+  margin: 0;
+  font-family: $main-font;
+  font-weight: 300;
+}
+
+.main-container {
+  position: relative;
+}
+
+.nav {
+  background: $color-main-medium;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: $nav-height;
+  color: $color-main-font;
+  font-size: 0.9rem;
+  font-weight: 200;
+
+  .search-button {
+    position: absolute;
+    left: 71px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .chat-button {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+}
+
+.round-button {
+  background: $color-main-dark;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+
+  i {
+    line-height: 40px;
+    color: $color-main-font;
+  }
+}
+
+.user {
+  position: absolute;
+  right: 80px;
+  top: 0;
+  bottom: 0;
+  line-height: $nav-height;
+
+  .user-avatar img {
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
+}
+
+.user-avatar img {
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
+}
+
+.sidebar {
+  background: $color-main-medium;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 400;
+  top: 0;
+  bottom: 0;
+  left: -60px;
+  width: $nav-height;
+  height: 100vh;
+  transition-duration: 300ms;
+}
+
+.sidebar-shown {
+  .sidebar {
+    left: 0;
+  }
+
+  .chat-button {
+    background: $color-button-pink;
+  }
+}
+
+.page-1 {
+  position: absolute;
+  top: $nav-height;
+  bottom: 0;
+  left: $nav-height;
+  right: $nav-height;
+}
+
+.agenda {
+  background: $color-main-font;
+  position: absolute;
+  bottom: 100px;
+  width: 330px;
+  top: 120px;
+  min-height: 536px;
+  left: $nav-height + 40px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(104, 104, 104, 0.5);
+
+  button {
+    position: absolute;
+    bottom: -17.5px;
+    left: 80px;
+  }
+}
+
+.day-info {
+  position: absolute;
+  top: 108px;
+  left: 480px;
+  line-height:10px;
+  width: 180px;
+
+  p.current-day {
+    color: $color-main-font;
+    font-size: 27px;
+    display: block;
+    font-weight: 400;
+  }
+  p.current-date {
+    color: $color-main-font;
+    font-size: 18px;
+    font-weight: 200;
+    opacity: 0.4;
+    display: block;
+  }
+}
+
+button {
+  text-transform: uppercase;
+  color: $color-main-font;
+  border-radius: 100px;
+  padding: 0 2.2rem 0 2.2rem;
+  height: 44px;
+  border: none;
+  background:$color-button-green;
+  font-size: 14px;
+}
+
+.bubbles {
+  position: absolute;
+  width: 400px;
+  min-height: 600px;
+  left: 760px;
+  top: 73px;
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+
+    img {
+      width: inherit;
+      height: inherit;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .notification {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      background: $color-button-pink;
+      width: 28px;
+      height: 28px;
+      color: $color-main-font;
+      text-align: center;
+      line-height: 28px;
+      font-size: 13px;
+    }
+
+    .bubble-name {
+      position: absolute;
+      background: $color-main-medium;
+      top: 120px;
+      height: 22px;
+      min-width: 120px;
+      color: $color-main-font;
+      font-size: 11px;
+      text-align: center;
+      line-height: 22px;
+    }
+  }
+
+  .bubble-active {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .bubble-1 {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    background: #00F08A;
+  }
+
+  .bubble-2 {
+    width: 50px;
+    height: 50px;
+    left: 230px;
+    top: 40px;
+    background: coral;
+  }
+
+  .bubble-3 {
+    width: 100px;
+    height: 100px;
+    top: 170px;
+    left: 110px;
+    background: #F00058;
+  }
+
+  .bubble-4 {
+    width: 80px;
+    height: 80px;
+    top: 330px;
+    left: -70px;
+    background: deeppink;
+  }
+
+  .bubble-5 {
+    width: 40px;
+    height: 40px;
+    top: 420px;
+    left: 200px;
+    background: #00D1F0;
+  }
+
+  .bubble-6 {
+    width: 60px;
+    height: 60px;
+    bottom: 0;
+    left: 90px;
+    background: tomato;
+  }
+}
+
+.page-2 {
+  position: absolute;
+  top: $nav-height + 50px;
+  bottom: 0;
+  right: -80vw;
+  width: 1440px;
+  height: 640px;
+}
+
+.calendar {
+  background: $color-main-medium;
+  position: absolute;
+  width: inherit;
+  top: 0;
+  bottom: 0;
+  left: 200px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+
+  .calendar-selectors {
+    position: absolute;
+    width:18px;
+    height: 100%;
+    left: -9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .calendar-selector {
+      background: deeppink;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .calendar-selector.selector-active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+
+  }
+}

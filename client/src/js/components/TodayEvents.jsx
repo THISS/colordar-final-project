@@ -7,12 +7,11 @@ export default class TodayEvents extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="four column todayevents-container">
-          <EventList />
-        </div>
-        <button>Add an event</button>
+      <div className="todayevents-container">
+        <EventList />
+        <button className="add-event-btn">Add an event</button>
       </div>
+
     );
   }
 }

@@ -1,25 +1,13 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {selectEvent} from '../actions/index';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { selectEvent, reqGetMasterEvents } from '../actions/event-actions';
 import moment from 'moment';
 
 class EventList extends Component {
-
-  // createListItems() {
-  //   return this.props.events.map((event) => {
-  //
-  //       return (
-  //         <li
-  //           key={event.id}
-  //           onClick={() => this.props.selectEvent(event)}
-  //         >
-  //           {moment(event.start).format('LT')} - {event.title}
-  //         </li>
-  //       );
-  //     }
-  //   });
-  // }
+  componentWillMount() {
+    this.props.getMasterEvents();
+  }
 
   render(){
     return(
@@ -44,21 +32,21 @@ class EventList extends Component {
 
 // Send a piece of state from your store to your component as props
 function eventsForCurrentDate({ events, currentDate }) {
-  // console.log('MapStateToProps for EventList');
-  const todaysEvents = events.filter(({start, end}) => {
-    // console.log(start, new Date(currentDate));
-    return moment(start).isSameOrAfter(moment(currentDate).startOf('day')) &&
-      moment(end).isSameOrBefore(moment(currentDate).endOf('day'))
+  const todaysEvents = events.events.filter(({start_time, end_time}) => {
+    return moment(start_time).isSameOrAfter(moment(currentDate).startOf('day')) &&
+      moment(end_time).isSameOrBefore(moment(currentDate).endOf('day'))
   });
-  // console.log(todaysEvents);
   return {
-    events: todaysEvents
+    events: todaysEvents,
+    calendars: state.calendars
   };
 }
 
-//
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectEvent: selectEvent}, dispatch)
+  return bindActionCreators({
+    selectEvent: selectEvent,
+    getMasterEvents: reqGetMasterEvents
+  }, dispatch)
 }
 
 export default connect(eventsForCurrentDate, mapDispatchToProps)(EventList);

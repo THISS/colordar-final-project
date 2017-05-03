@@ -1,9 +1,14 @@
 // groups table
 module.exports = function(knex) {
+const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
+
   // functions for the database go here
   const addGroup = (groupObj) => {
-    return knex.insert(groupObj, ['id', 'name', 'color_id'])
-      .into('groups');
+    return Promise.all([
+      knex.insert(groupObj, ['id', 'name', 'color_id'])
+        .into('groups'),
+      addCalendar(groupObj) 
+    ]);
   };
   
   const addUserToGroupByUurl = (uurl) => {
@@ -72,6 +77,14 @@ module.exports = function(knex) {
     .whereNot({user_id: userId});
   };
 
+  const linkCalendar = (groupId, calendarId) => {
+    return knex.insert({
+      group_id: groupId,
+      calendar_id: calendarId
+    })
+      .into('groups_calendars');
+  };
+
   const linkUser = (userId, groupId) => {
     return knex.insert({
       user_id: userId,
@@ -106,6 +119,7 @@ module.exports = function(knex) {
     getAllGroups,
     getGroupById,
     getUsersByGroup,
+    linkCalendar,
     linkUser,
     requestUsersToJoin,
     updateGroup,

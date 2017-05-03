@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './Nav.jsx';
 import Sidebar from './Sidebar.jsx';
 import Agenda from './Agenda.jsx';
@@ -8,20 +9,24 @@ import CalendarContainer from './CalendarContainer.jsx';
 
 export default function App(props) {
   return (
-    <div className="main-container sidebar-shown">
+    <Router>
+      <div className="main-container sidebar-shown">
 
-      <Nav />
-      <Sidebar />
-
-      <div className="page-1">
-        <Agenda />
-        <DayInfo />
-        <Bubbles />
+        <Nav />
+        <Sidebar />
+        <Route path='/' >
+          <div className="page-1">
+            <Agenda />
+            <DayInfo />
+            <Bubbles />
+          </div>
+        </Route>
+        <Route path='/calendar'>
+          <div className="page-2">
+            <CalendarContainer />
+          </div>
+        </Route>
       </div>
-
-      <div className="page-2">
-        <CalendarContainer />
-      </div>
-    </div>
+    </Router>
   );
 }

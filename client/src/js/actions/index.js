@@ -1,24 +1,24 @@
-import { EVENT_SELECTED, ADD_EVENT } from './action_types.js';
+// Import All Actions
+import * as events from 'event-actions';
+import * as groups from 'group-actions';
+import * as calendars from 'calendar-actions';
+import * as users from 'user-actions';
+import * as chats from 'chat-actions';
 
 // Create the action controller which returns the ACTION within the function
 export const selectEvent = (event) => {
-  console.log("You clicked on event:", event.title);
   return {
-    type: EVENT_SELECTED,
+    type: events.SELECT_EVENT,
     payload: event
   }
 };
 
-//REALLY DIRTY
-
-var next_id = 1234;
-
 export const addEvent = (title, start, end) => ({
-  type: ADD_EVENT,
+  type: events.POST_EVENT,
   payload: {
-    id: next_id++,
-    title,
-    start,
-    end
+    name: title,
+    start_time: start,
+    end_time: end,
+    color_id: 3
   }
 });

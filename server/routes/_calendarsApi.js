@@ -22,14 +22,11 @@ module.exports = function(db) {
   });
 
   router.post('/', (req, res) => {
-    const userId = 1; // TODO:
+    const userId = 2; // TODO:
     const responseObj = {};
 
-    const calendarInput =  { // TODO:
-      owner_id: userId,
-      name: 'Baking Club',
-      color_id: 2
-    };
+    const calendarInput =  req.body;
+    calendarInput.owner_id = userId;
 
     db.calendars.addCalendar(calendarInput)
       .then((queryResponse) => {
@@ -46,7 +43,7 @@ module.exports = function(db) {
 
   router.get('/:id', (req, res) => {
     const calendarId = req.params.id;
-    const userId = 1; // TODO: update
+    const userId = 2; // TODO: update
     const responseObj = {};
     if (!calendarId) {
       errorHandler('no calendarId given', res);
@@ -86,17 +83,13 @@ module.exports = function(db) {
     }
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id/edit', (req, res) => {
     const calendarId = req.params.id;
-    // TODO: req.body
-    const calendarInput =  {
-      name: 'Drinking Crew',
-      color_id: 2
-    }
+    const calendarInput =  req.body;
 
     db.calendars.updateCalendar(calendarId, calendarInput)
       .then((queryResponse) => {
-        res.json(queryResponse);
+        res.json(queryResponse[0]);
       })
       .catch((error) => {
         errorHandler(error, res);

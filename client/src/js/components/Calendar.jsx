@@ -10,12 +10,11 @@ import $ from 'jquery';
 import Modal from 'react-modal';
 
 import EventForm from './EventForm.jsx';
-
-import { addEvent } from '../actions/index'
+import { addEvent } from '../actions/event-actions';
 
 // connect to redux
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const customStyles = {
   content: {
@@ -42,10 +41,11 @@ class Calendar extends Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
+    // TODO: is this needed..
     // this.props.addEvent({
     //
     // });
@@ -53,8 +53,7 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    const {calendar} = this.refs;
-
+    const { calendar } = this.refs;
     $(calendar).fullCalendar({
       header: {
         left: 'prev',
@@ -86,7 +85,7 @@ class Calendar extends Component {
 
 
   componentWillUnmount() {
-    const {calendar} = this.refs;
+    const { calendar } = this.refs;
 
     $(calendar).fullCalendar('destroy');
   }
@@ -94,11 +93,22 @@ class Calendar extends Component {
   render() {
     return (
       <div ref="calendar" className="calendar">
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
-          <h2>Add an event</h2>
-          <EventForm />
-          <button onClick={this.closeModal}>close</button>
-        </Modal>
+        <div>
+          <Modal 
+            isOpen={ this.state.modalIsOpen } 
+            onRequestClose={ this.closeModal } 
+            style={ customStyles} 
+            contentLabel="Add an Event">
+
+            <h2>Add an event</h2>
+            <form>
+              <input/>
+              <button>Submit</button>
+            </form>
+            <button onClick={this.closeModal}>Close</button>
+
+          </Modal>
+        </div>
       </div>
     );
   }
@@ -106,7 +116,7 @@ class Calendar extends Component {
 
 // Send a piece of state from your store to your component as props
 function mapStateToProps(state) {
-  return {events: state.events};
+  return { events: state.events.events };
 }
 
 export default connect(mapStateToProps)(Calendar);

@@ -13,7 +13,7 @@ export default function App(props) {
           <i className="fa fa-search" aria-hidden="true"></i>
         </span>
         <div className="user">
-          <span className="greeting">Good morning, Jake</span>
+          <span className="greeting">Good morning, Harry</span>
           <span className="user-avatar">
             <img src="http://rivista-cdn.pittsburghmagazine.com/Best-of-the-Burgh-Blogs/The-412/May-2014/Want-to-Win-a-Free-Flight-to-San-Francisco/c117ecd8acbe616668fea6528829433a.jpg?ver=1400627273" />
           </span>
@@ -72,6 +72,77 @@ export default function App(props) {
 
       <div className="page-1">
         <div className="agenda">
+          <img className="busy-squiggle" src="./images/busy-squiggle.png" alt="busy-squiggle" />
+
+
+            {/*
+            <div className="agenda-list-container">
+              <div className="agenda-list-group">
+              <p className="agenda-time">10:00</p>
+              <div className="agenda-desc-container">
+                <p className="agenda-title">Yoga</p>
+                <p className="agenda-location">Calm studio</p>
+              </div>
+              </div>
+              <div className="agenda-list-group">
+                <p className="agenda-time">10:00</p>
+                <div className="agenda-desc-container">
+                  <p className="agenda-title">Yoga</p>
+                  <p className="agenda-location">Calm studio</p>
+                </div>
+              </div>
+            </div>*/}
+
+          <div className="agenda-list-container">
+            <table className="agenda-table">
+              <tr>
+                <td>
+                  <p className="agenda-time">10:00</p>
+                </td>
+                <td className="agenda-list-group">
+                  <strong className="agenda-title">Yoga</strong>
+                  <p className="agenda-location">Calm studio</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="agenda-time">11:30</p>
+                </td>
+                <td className="agenda-list-group">
+                  <strong className="agenda-title">Breakfast</strong>
+                  <p className="agenda-location">Purebread</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="agenda-time">13:00</p>
+                </td>
+                <td className="agenda-list-group">
+                  <strong className="agenda-title">Second breakfast</strong>
+                  <p className="agenda-location">Chambar</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="agenda-time">16:30</p>
+                </td>
+                <td className="agenda-list-group">
+                  <strong className="agenda-title">Meeting</strong>
+                  <p className="agenda-location">Some building</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="agenda-time">19:00</p>
+                </td>
+                <td className="agenda-list-group">
+                  <strong className="agenda-title">Dinner</strong>
+                  <p className="agenda-location">Hawksworth</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+
           <button className="add-event-button">Add an event</button>
         </div>
         <div className="day-info">
@@ -81,7 +152,7 @@ export default function App(props) {
         <div className="bubbles">
           <span className="bubble bubble-1"></span>
           <span className="bubble bubble-2">
-            <img src="http://media02.hongkiat.com/black-white-portraits/warmth.jpg" alt="avatar" />
+            <img src="http://www.keatleyphoto.com/wp-content/uploads/2016/05/IMG_2589.jpg" alt="avatar" />
           </span>
           <span className="bubble bubble-3 bubble-active">
             <img src="https://s-media-cache-ak0.pinimg.com/originals/ff/13/a1/ff13a12a250b6e3cfef2ce26b61a755c.jpg" alt="avatar" />

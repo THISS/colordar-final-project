@@ -248,7 +248,7 @@ table.agenda-table{
     text-align:right;
     padding-right: 30px;
     vertical-align: top;
-    &:after:nth-child(1){
+    &:after{
       display: block;
       content: ' ';
       width: 10px;

@@ -1,26 +1,97 @@
+// .calendar-container {
+//   position: absolute;
+//   right:-70rem;
+// }
+//
+// .modal {
+//   display:none;
+//   background-color: rgba(0, 0, 0, 0.4);
+// }
+//
+// .close {
+//   color:red;
+//   width:40px;
+// }
+//
+// .active {
+//   display:block;
+// }
+//
+// .event-active {
+//   background-color: blue;
+// }
+//
+// .ReactModal__Overlay {
+//   z-index: 1000;
+// }
+
 .calendar-container {
-  position: absolute;
-  right:-70rem;
+  width: 80vw;
+  height: 640px;
 }
 
-.modal {
-  display:none;
-  background-color: rgba(0, 0, 0, 0.4);
+.fc th {
+  text-align: left;
+  color: $color-main-font;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size:13px;
 }
 
-.close {
-  color:red;
-  width:40px;
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+  float: left;
+  color: $color-main-font;
+  font-weight: 300;
+  font-size: 13px;
 }
 
-.active {
-  display:block;
+.fc th, .fc td {
+  border-style: none;
 }
 
-.event-active {
-  background-color: blue;
+.fc td.fc-today {
+  border-style: none;
+  background: $color-main-dark;
 }
 
-.ReactModal__Overlay {
-  z-index: 1000;
+.fc-row table thead tr th.fc-day-header {
+  height: 60px;
+}
+
+thead.fc-head {
+  border-bottom: 1px solid rgba(211, 222, 233, 0.5);
+}
+
+.fc-scroller.fc-day-grid-container {
+  margin-top: 40px;
+}
+
+td.fc-event-container a.fc-day-grid-event .fc-content {
+  background-color: $color-button-green;
+  color: $color-main-medium;
+  padding: 0 20px 0 20px;
+  font-size: 9px;
+  border-radius: 100px;
+  margin-bottom: 4px;
+}
+
+.fc-event {
+  background: none;
+  border: none;
+}
+
+.fc-toolbar {
+  height: 50px;
+
+  h2 {
+    color: $color-main-font;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  button {
+    background: none;
+    border: none;
+    color: $color-main-font;
+    box-shadow: none;
+  }
 }

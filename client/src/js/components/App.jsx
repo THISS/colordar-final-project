@@ -4,7 +4,7 @@ import Sidebar from './Sidebar.jsx';
 import Agenda from './Agenda.jsx';
 import DayInfo from './DayInfo.jsx';
 import Bubbles from './Bubbles.jsx';
-import Calendar from './Calendar.jsx';
+import CalendarContainer from './CalendarContainer.jsx';
 
 export default function App(props) {
   return (
@@ -20,7 +20,7 @@ export default function App(props) {
       </div>
 
       <div className="page-2">
-        <Calendar />
+        <CalendarContainer />
       </div>
     </div>
   );

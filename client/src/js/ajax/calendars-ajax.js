@@ -10,26 +10,26 @@ import $ from 'jquery';
 
 const hostAddress = 'http://localhost:8080/api/calendars';
 
-export const getMyCalendars = () => {
+export const getMyCalendarsAjax = () => {
   return $.ajax(`${ hostAddress }`, {
     method: 'get'
   });
 };
 
-export const getCalendarById = (calendarId) => {
+export const getCalendarByIdAjax = (calendarId) => {
   return $.ajax(`${ hostAddress }/${calendarId}`, {
     method: 'get'
   });
 };
 
-export const addCalendar = (calendar) => {
+export const addCalendarAjax = (calendar) => {
   return $.ajax(`${ hostAddress }`, {
     method: 'post',
     data: calendar
   });
 };
 
-export const updateCalendar = (calendar) => {
+export const updateCalendarAjax = (calendar) => {
   return $.ajax(`${ hostAddress }/${calendar.id}/edit`, {
     method: 'put',
     data: calendar

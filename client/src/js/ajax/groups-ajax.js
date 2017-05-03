@@ -10,45 +10,45 @@ import $ from 'jquery';
 
 const hostAddress = 'http://localhost:8080/api/groups';
 
-export const getMyGroups = () => {
+export const getMyGroupsAjax = () => {
   return $.ajax(`${ hostAddress }`, {
     method: 'get'
   });
 };
 
-export const getGroupById = (groupId) => {
+export const getGroupByIdAjax = (groupId) => {
   return $.ajax(`${ hostAddress }/${groupId}`, {
     method: 'get'
   });
 };
 
-export const getGroupByIdWithUsers = (groupId) => {
+export const getGroupByIdWithUsersAjax = (groupId) => {
   return $.ajax(`${ hostAddress }/${groupId}/withusers`, {
     method: 'get'
   });
 };
 
-export const addUserToGroup = (uurl) => {
+export const addUserToGroupAjax = (uurl) => {
   return $.ajax(`${ hostAddress }?uurl=${uurl}`, {
     method: 'get'
   });
 };
 
-export const addUsersByEmail = (groupId, emailsArr) => {
+export const addUsersByEmailAjax = (groupId, emailsArr) => {
   return $.ajax(`${ hostAddress }/${ groupId }/addemails`, {
     method: 'put',
     data: { emails: emailsArr }
   });
 };
 
-export const addGroup = (group) => {
+export const addGroupAjax = (group) => {
   return $.ajax(`${ hostAddress }`, {
     method: 'post',
     data: group
   });
 };
 
-export const updateGroup = (group) => {
+export const updateGroupAjax = (group) => {
   return $.ajax(`${ hostAddress }/${group.id}/edit`, {
     method: 'put',
     data: group

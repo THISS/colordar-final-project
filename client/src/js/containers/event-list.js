@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectEvent, getEvents } from '../actions/event-actions';
+import { selectEvent, reqGetMasterEvents } from '../actions/event-actions';
 import moment from 'moment';
 
 class EventList extends Component {
   componentWillMount() {
-    this.props.getEvents(true);
-
+    this.props.getMasterEvents();
   }
 
   createListItems() {
@@ -38,7 +37,8 @@ class EventList extends Component {
 // Send a piece of state from your store to your component as props
 function mapStateToProps(state) {
   return {
-    events: state.events.events
+    events: state.events.events,
+    calendars: state.events.calendars
   };
 }
 
@@ -46,7 +46,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     selectEvent: selectEvent,
-    getEvents: getEvents
+    getMasterEvents: reqGetMasterEvents
   }, dispatch)
 }
 

@@ -89,14 +89,13 @@ module.exports = function(db) {
   });
 
   router.delete('/', (req, res) => {
-    const eventId = req.body.id;
+    const eventId = Number(req.body.id);
     if (!eventId) {
       errorHandler('no eventId given', res);
     }
     db.deleteEvent(eventId)
       .then((success) => {
-        console.log({deleted: true});
-        res.json({deleted: true});
+        res.json({deleted: true, id: eventId});
       })
       .catch((error) => {
         errorHandler(error, res);

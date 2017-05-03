@@ -49,7 +49,6 @@ class Calendar extends Component {
 
   componentDidMount() {
     const { calendar } = this.refs;
-
     $(calendar).fullCalendar({
       events: this.props.events,
       editable: true,
@@ -95,7 +94,7 @@ class Calendar extends Component {
 
 // Send a piece of state from your store to your component as props
 function mapStateToProps(state) {
-  return {events: state.events};
+  return { events: state.events.events };
 }
 
 export default connect(mapStateToProps)(Calendar);

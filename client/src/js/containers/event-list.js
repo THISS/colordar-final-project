@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectEvent } from '../actions/event-actions';
+import { selectEvent, getEvents } from '../actions/event-actions';
 import moment from 'moment';
 
 class EventList extends Component {
+  componentWillMount() {
+    this.props.getEvents(true);
+
+  }
 
   createListItems() {
     return this.props.events.map((event) => {
       // TODO: make this date dynamic
-      if (moment(event.start).isSame('2017-4-25', 'day')){
+      if (moment(event.start).isSame(moment(), 'day')){
         return (
           <li
             key={ event.id }
             onClick={() => this.props.selectEvent(event)}
           >
-            {moment(event.start).format('LT')} - { event.title }
+            { moment(event.start).format('LT') } - { event.title }
           </li>
         );
       }
@@ -25,7 +29,7 @@ class EventList extends Component {
   render(){
     return(
       <ul>
-        {this.createListItems()}
+        { this.createListItems() }
       </ul>
     );
   }
@@ -34,14 +38,16 @@ class EventList extends Component {
 // Send a piece of state from your store to your component as props
 function mapStateToProps(state) {
   return {
-    events: state.events
+    events: state.events.events
   };
 }
 
 //
 function mapDispatchToProps(dispatch) {
-  //TODO: Neccessary?..below
-  return bindActionCreators({selectEvent: selectEvent}, dispatch)
+  return bindActionCreators({
+    selectEvent: selectEvent,
+    getEvents: getEvents
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);

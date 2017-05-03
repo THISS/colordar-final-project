@@ -12,6 +12,8 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
+const bodyParser = require('body-parser');
+
 const Winston = require('winston');
 const winstonConfig = require('./winstonconfig');
 const logger = new Winston.Logger(winstonConfig(Winston));
@@ -30,8 +32,10 @@ if (ENV !== 'production') {
   app.use(knexLogger(knex));
 }
 
-app.use(express.static('client/public'));
+app.use(bodyParser.urlencoded({extended: true }));
+app.use(bodyParser.json());
 
+app.use(express.static('client/public'));
 // Inject our knex into dbhelpers
 const dbHelpers = require('./server/db/helpers')(knex);
 

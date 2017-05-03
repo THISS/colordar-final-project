@@ -13,8 +13,6 @@ class App extends Component {
           <div>
             <Nav />
             <Route exact path='/' component={ Today } />
-            <Route path='/groups' component={ Today } />
-            <Route path='/chat' component={ Today } />
           </div>
         </Router>
       </div>

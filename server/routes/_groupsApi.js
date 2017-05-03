@@ -37,16 +37,26 @@ module.exports = function(db) {
     const userId = 1; // TODO:
     const responseObj = {};
 
-    const groupInput =  { // TODO:
-      name: 'Banana Pickers',
-      color_id: 4,
-      owner_id: userId
-    };
+    const groupInput =  req.body;
+    groupInput.owner_id = userId;
 
     db.groups.addGroup(groupInput)
       .then((queryResponse) => {
         responseObj.groups = queryResponse[0];
-        return db.groups.linkUser(userId, queryResponse[0].id)
+        return Promise.all([
+          db.groups.linkUser(
+            userId,
+            queryResponse[0][0].id
+          ),
+          db.groups.linkCalendar(
+            queryResponse[0][0].id,
+            queryResponse[1][0].id
+          ),
+          db.calendars.linkMaster(
+            userId,
+            queryResponse[1][0].id
+          )
+        ]);
       })
       .then((queryResponse) => {
         res.json(responseObj);
@@ -79,12 +89,39 @@ module.exports = function(db) {
     if (!groupId) {
       errorHandler('no groupId given', res);
     }
-    
+    db.groups.getGroupById(groupId)
+      .then((queryResponse) => {
+        console.log(queryResponse);
+        Object.assign(responseObj, {
+          id: queryResponse.id,
+          name: queryResponse.name,
+          color_id: queryResponse.color_id
+        });
+        return db.calendars.getCalendarById(queryResponse.calendar_id);
+      })
+      .then((queryResponse) => {
+        responseObj.calendar = queryResponse;
+        res.json(responseObj);
+      })
+      .catch((error) => {
+        errorHandler(error, res);
+      });
+  });
+
+  router.get('/:id/withusers', (req, res) => {
+    const groupId = req.params.id;
+    const userId = 1; // TODO: update
+    const responseObj = {};
+
+    if (!groupId) {
+      errorHandler('no groupId given', res);
+    }
     Promise.all([
       db.groups.getGroupById(groupId),
       db.groups.getUsersByGroup(groupId, userId)
     ])
       .then((queryResponse) => {
+        console.log(queryResponse);
         Object.assign(responseObj, {
           id: queryResponse[0].id,
           name: queryResponse[0].name,
@@ -102,13 +139,9 @@ module.exports = function(db) {
       });
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id/edit', (req, res) => {
     const groupId = req.params.id;
-    // TODO: req.body
-    const groupInput = {
-      name: 'Strawberry Picking',
-      color_id: 3
-    }
+    const groupInput = req.body;
 
     db.groups.updateGroup(groupId, groupInput)
       .then((queryResponse) => {
@@ -119,13 +152,11 @@ module.exports = function(db) {
       });
   });
 
-  router.put('/:id/adduser', (req, res) => {
-    const userId = 2; // TODO:
+  router.put('/:id/addemails', (req, res) => {
+    const userId = 1; // TODO:
     const groupId = req.params.id;
-    const emailsInput = [ // TODO:
-      'brenton@lighthouselabs.com',
-      'jeff@lighthouselabs.com'
-    ];
+    const emailsInput = req.body.emails;
+
     const addUsersToGroup = emailsInput.map((email) => ({
         inviter_id: userId,
         group_id: groupId,

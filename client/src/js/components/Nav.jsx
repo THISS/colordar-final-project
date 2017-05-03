@@ -18,9 +18,9 @@ class Nav extends Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li><Link to='/'>Today</Link></li>
-              <li><Link to='/groups'>Groups</Link></li>
-              <li><Link to='/chat'>Chat</Link></li>
+              <li><a href='/#today'>Today</a></li>
+              <li><a href='/#groups'>Groups</a></li>
+              <li><a href='/#chat'>Chat</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {/*TODO: need to render these depending on if the user is logged in or not*/}

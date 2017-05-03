@@ -5,10 +5,8 @@ import { Provider } from 'react-redux';
 
 import socket from './utilities/sockets';
 import store from './store';
-
 // Our component imports
 import App from './components/App.jsx';
-
 
 ReactDOM.render(
   <Provider store={ store }>

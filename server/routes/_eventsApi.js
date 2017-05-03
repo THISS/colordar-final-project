@@ -5,13 +5,14 @@ module.exports = function(db) {
   
   const errorHandler = (error, res) => {
     console.log(error);
-    res.json({error: 'something funky went down'});
+    res.json({ error: 'something funky went down' });
   };
 
   router.get('/',(req, res) => {
-    const calId = req.query.calid;
+    const calId = Number(req.query.calid);
+    
     const isMaster = req.query.ismaster;
-    const userId = 2; // TODO: add the users id here
+    const userId = 1; // TODO: add the users id here
     const responseObj = {};
 
     if (isMaster) {
@@ -43,15 +44,7 @@ module.exports = function(db) {
   });
 
   router.post('/', (req, res) => {
-    // Get the input from the body as JSON TODO:
-    const eventInput = {
-      name: 'darts at mine',
-      location: 'my house',
-      start_time: '2017-04-29T23:07:20.184Z',
-      end_time: '2017-04-29T23:07:20.184Z',
-      calendar_id: 2,
-      color_id: 3
-    };
+    const eventInput = req.body;
     
     db.addEvent(eventInput)
       .then((queryResponse) => {
@@ -77,20 +70,13 @@ module.exports = function(db) {
       });
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id/edit', (req, res) => {
     const eventId = req.params.id;
     if (!eventId) {
       errorHandler('no eventId given', res);
     }
-    // TODO: replace with body of PUT
-    const eventObj = {
-      name: 'Play pool',
-      location: 'Johns Place',
-      start_time: '2017-04-29T23:07:20.184Z',
-      end_time: '2017-04-29T23:07:20.184Z',
-      calendar_id: 2,
-      color_id: 2
-    };
+    
+    const eventObj = req.body;
 
     db.updateEvent(eventId, eventObj)
       .then((queryResponse) => {
@@ -102,13 +88,14 @@ module.exports = function(db) {
       });
   });
 
-  router.delete('/:id', (req, res) => {
-    const eventId = req.params.id;
+  router.delete('/', (req, res) => {
+    const eventId = req.body.id;
     if (!eventId) {
       errorHandler('no eventId given', res);
     }
     db.deleteEvent(eventId)
       .then((success) => {
+        console.log({deleted: true});
         res.json({deleted: true});
       })
       .catch((error) => {

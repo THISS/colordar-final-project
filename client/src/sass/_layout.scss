@@ -1,32 +1,38 @@
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
 body {
-  list-style-type: none;
-  background-color: $background-color-light;
-  color: $body-font;
-  font-size: 1rem;
-  font-family: 'Montserrat', sans-serif;
-  // overflow-y: hidden;
+  background: $color-main-light;
+  margin: 0;
+  font-family: $main-font;
+  font-weight: 300;
 }
 
-.container {
-  width: auto;
-  // max-width: 100%;
-  clear: both;
-  margin-top: 4rem;
+.main-container {
+  position: relative;
+}
+
+.page-1 {
+  position: absolute;
+  top: $nav-height;
+  bottom: 0;
+  left: $nav-height;
+  right: $nav-height;
+}
+
+.page-2 {
+  position: absolute;
+  top: $nav-height + 50px;
+  bottom: 0;
+  right: -80vw;
+  width: 1440px;
+  height: 640px;
 }
 
 button {
-  background-color: $button-color;
-  font-weight: 300;
+  text-transform: uppercase;
+  color: $color-main-font;
+  border-radius: 100px;
+  padding: 0 2.2rem 0 2.2rem;
+  height: 44px;
   border: none;
-  border-radius: 40px;
-  color: $body-font;
+  background:$color-button-green;
+  font-size: 14px;
 }

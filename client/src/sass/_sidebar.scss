@@ -1,0 +1,85 @@
+.sidebar {
+  background: $color-main-medium;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 400;
+  top: 0;
+  bottom: 0;
+  left: -60px;
+  width: $nav-height;
+  height: 100vh;
+  transition-duration: 300ms;
+
+  .nav-height-container {
+    height: $nav-height;
+    width: $nav-height;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .chat-button {
+    position: absolute;
+    left: 150%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 100;
+  }
+
+  .add-button {
+    position: absolute;
+    background: $color-button-green;
+    left: 50%;
+    top: 11%;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 100;
+    width: 35px;
+    height: 35px;
+
+    i {
+      line-height: 35px;
+    }
+  }
+
+  .sidebar-chat-container {
+    position: absolute;
+    top: 130px;
+    left: 0;
+    bottom: 0;
+    width: $nav-height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .user-avatar {
+      width: 33px;
+      height: 33px;
+      padding: 7px 0 7px 0;
+
+      img {
+        width: 33px;
+        height: 33px;
+        object-fit: cover;
+      }
+    }
+
+    .more-users {
+      position: absolute;
+      bottom: 20px;
+      font-weight: 600;
+      color: $color-main-font;
+    }
+
+  }
+}
+
+.sidebar-shown {
+  .sidebar {
+    left: 0;
+  }
+
+  .chat-button {
+    background: $color-button-pink;
+    left: 50%;
+  }
+}

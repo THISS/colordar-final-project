@@ -1,0 +1,21 @@
+.day-info {
+  position: absolute;
+  top: 108px;
+  left: 480px;
+  line-height:10px;
+  width: 180px;
+
+  p.current-day {
+    color: $color-main-font;
+    font-size: 27px;
+    display: block;
+    font-weight: 400;
+  }
+  p.current-date {
+    color: $color-main-font;
+    font-size: 18px;
+    font-weight: 200;
+    opacity: 0.4;
+    display: block;
+  }
+}

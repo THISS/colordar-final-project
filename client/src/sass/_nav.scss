@@ -1,41 +1,58 @@
-.navbar {
-  display: flex;
-  background-color: #282842;
+.nav {
+  background: $color-main-medium;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  list-style-type: none;
-  padding: 0rem 1rem 0rem 1rem;
   position: fixed;
-  width: 100%;
-  z-index: 100;
+  left: 0;
+  right: 0;
   top: 0;
+  height: $nav-height;
+  color: $color-main-font;
+  font-size: 0.9rem;
+  font-weight: 200;
 
-  .navbar-left, .navbar-right{
-    display: flex;
-    flex: 1;
-  }
-
-  .navbar-right {
-    justify-content: flex-end;
-    align-items: center;
-
-    span {
-      font-weight:300;
-      margin-right: 1.8rem;
-    }
-
-    img.profile-img {
-      border-radius: 50%;
-      width:2rem;
-      height:2rem;
-    }
+  .search-button {
+    position: absolute;
+    left: 71px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
-.round-buttons {
-  display: inline-block;
-  border-radius: 60px;
-  background-color: #1F1F31;
-  padding: 0.5rem;
-  margin: 1rem;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+.round-button {
+  background: $color-main-dark;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+
+  i {
+    line-height: 40px;
+    color: $color-main-font;
+  }
+}
+
+.user {
+  position: absolute;
+  right: 80px;
+  top: 0;
+  bottom: 0;
+  line-height: $nav-height;
+
+  .greeting {
+    font-weight: 300;
+  }
+
+  .user-avatar img {
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
+}
+
+.user-avatar img {
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
 }

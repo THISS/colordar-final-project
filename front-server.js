@@ -9,7 +9,7 @@ new WebpackDevServer(webpack(config), {
   watchOptions: {
     ignored: [/node_modules/,/server/],
     aggregateTimeout: 300,
-    poll: 1000
+    poll: 2000
   }
 })
 .listen(3000, '0.0.0.0',  (err, result) =>{

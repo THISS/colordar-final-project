@@ -7,6 +7,7 @@ import 'fullcalendar/dist/fullcalendar.css';
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import $ from 'jquery';
+import jQuery from 'jquery';
 import Modal from 'react-modal';
 
 import EventForm from './EventForm.jsx';
@@ -16,6 +17,9 @@ import { addEvent } from '../actions/index'
 // connect to redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+
+import { findDOMNode } from 'react-dom';
+
 
 const customStyles = {
   content: {
@@ -53,6 +57,7 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
+
     const {calendar} = this.refs;
 
     $(calendar).fullCalendar({
@@ -67,20 +72,29 @@ class Calendar extends Component {
       selectable: true,
       height: 'parent',
 
-      // dayClick: (date, jsEvent, view) => {
-      //   this.setState({
-      //     modalIsOpen: true
-      //   })
+      dayClick: (date, jsEvent, view) => {
+        this.setState({
+          modalIsOpen: true
+        })
+      }
+
+      //
+      // eventClick: function (calEvent, jsEvent, view) {
+      //   console.log(typeof $("#dialog").dialog);
+      //   $("#dialog").dialog({
+      //       autoOpen: false,
+      //     }
+      //   );
       // }
 
-      dayClick: function(date, allDay, jsEvent, view) {
-        $("#dialog").dialog("option", "position", {
-          my: "bottom-10",
-          of: jsEvent
-        });
-        $("#dialog").dialog("open");
-      }
-      
+      // dayClick: function(date, allDay, jsEvent, view) {
+      //   $("#dialog").dialog("option", "position", {
+      //     my: "bottom-10",
+      //     of: jsEvent
+      //   });
+      //   $("#dialog").dialog("open");
+      // }
+
     });
   }
 
@@ -91,6 +105,11 @@ class Calendar extends Component {
     $(calendar).fullCalendar('destroy');
   }
 
+  handleToggle = () => {
+    const el = findDOMNode(this.refs.toggle);
+    $(el).slideToggle();
+  };
+
   render() {
     return (
       <div ref="calendar" className="calendar">
@@ -99,6 +118,23 @@ class Calendar extends Component {
           <EventForm />
           <button onClick={this.closeModal}>close</button>
         </Modal>
+
+      <ul className="profile-info">
+        <li>
+          <span className="info-title">User Name : </span> Shuvo Habib
+          </li>
+      </ul>
+
+      <ul className="profile-info additional-profile-info-list" ref="toggle">
+        <li>
+          <span className="info-email">Office Email</span>   me@shuvohabib.com
+        </li>
+      </ul>
+
+      <div className="ellipsis-click" onClick={this.handleToggle}>
+        <p> CLICK ON MEEE </p>
+      </div>
+
       </div>
     );
   }

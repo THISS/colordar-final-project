@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// connect to redux
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import moment from 'moment';
-window.moment = moment;
 // Import fullcalendar.js
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -14,20 +16,20 @@ import $ from 'jquery';
 import Modal from 'react-modal';
 
 import EventForm from './EventForm.jsx';
-import { addEvent } from '../actions/event-actions';
-
-// connect to redux
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { reqAddEvent } from '../actions/event-actions';
 
 const customStyles = {
   content: {
+    zIndex: 10,
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
+  },
+  overlay: {
+    zIndex: 9
   }
 };
 
@@ -106,6 +108,8 @@ class Calendar extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.addEvent = this.addEvent.bind(this);
+    this.addNewEventModal = this.addNewEventModal.bind(this);
   }
 
   openModal() {
@@ -116,23 +120,32 @@ class Calendar extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  Event({ event }) {
-  return (
-    <span style={{ backgroundColor: event.color }}>
-      <strong>
-      { event.title }
-      </strong>
-      { event.location && (':  ' + event.location)}
-    </span>
-  )
-}
+  addEvent(event) {
+    this.props.reqAddEvent(event);
+    this.closeModal();
+  }
 
-EventAgenda({ event }) {
-  return <span>
-    <em style={{ color: 'crimson'}}>{event.title}</em>
-    <p>{ event.location }</p>
-  </span>
-}
+  Event({ event }) {
+    return (
+      <span style={{ backgroundColor: event.color }}>
+        <strong>
+        { event.title }
+        </strong>
+        { event.location && (':  ' + event.location)}
+      </span>
+    )
+  }
+
+  addNewEventModal(selectSlot) {
+    this.openModal();
+  }
+
+  EventAgenda({ event }) {
+    return <span>
+      <em style={{ color: 'crimson'}}>{event.title}</em>
+      <p>{ event.location }</p>
+    </span>
+  }
 
   render() {
     return (
@@ -149,11 +162,8 @@ EventAgenda({ event }) {
             },
             toolbar: CustomToolbar
           }}
-          onSelectEvent={ event => console.log(event.title)}
-          onSelectSlot={ (slotInfo) => console.log(
-            `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-            `\nend: ${slotInfo.end.toLocaleString()}`
-          )}
+          onSelectEvent={ this.updateEvent }
+          onSelectSlot={ this.addNewEventModal }
         />
 
           <Modal
@@ -163,11 +173,8 @@ EventAgenda({ event }) {
             contentLabel="Add an Event">
 
             <h2>Add an event</h2>
-            <form>
-              <input/>
-              <button>Submit</button>
-            </form>
-            <button onClick={this.closeModal}>Close</button>
+            <EventForm submitFunc={ this.addEvent }/>
+            <button onClick={ this.closeModal }>Close</button>
 
           </Modal>
       </div>
@@ -180,4 +187,11 @@ function mapStateToProps(state) {
   return { events: state.events.events };
 }
 
-export default connect(mapStateToProps)(Calendar);
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    reqAddEvent: reqAddEvent
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

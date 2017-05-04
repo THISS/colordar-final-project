@@ -5,30 +5,26 @@ import $ from 'jquery';
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/flatpickr.css';
 
-// @connect(null, mapDispatchToProps)
-// @form({form: 'CreateEventForm'})
-// export default
 class EventForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
 
-    let eventTitle = this.refs.eventtitle.value;
-    let eventStart = this.state.eventstart;
-    let eventEnd = this.state.eventend;
+    const eventTitle = this.refs.eventtitle.value;
+    const eventStart = this.state.eventstart;
+    const eventEnd = this.state.eventend;
+    const eventLocation = this.refs.eventlocation.value;
 
-    console.log("pls work", eventTitle, eventStart, eventEnd);
+    const newEvent = {
+      name: eventTitle,
+      location: eventLocation,
+      start_time: eventStart,
+      end_time: eventEnd,
+      color_id: 3,
+      calendar_id: 1
+    };
 
-    // $.ajax({
-    //   url: '/events',
-    //   type: 'post',
-    //   data: {title: eventTitle, start: eventStart, end: eventEnd},
-    //     success: (response) => {
-    //       console.log('it worked', response);
-    //       // todo receive event with id added from server
-    //       // todo make ,redux action to send response to the store
-    //     }
-    // });
+    this.props.submitFunc(newEvent);
   }
 
 

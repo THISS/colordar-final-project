@@ -90,6 +90,7 @@ EventAgenda({ event }) {
             `\nend: ${slotInfo.end.toLocaleString()}`
           )}
         />
+        
           <Modal
             isOpen={ this.state.modalIsOpen }
             onRequestClose={ this.closeModal }

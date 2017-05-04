@@ -65,3 +65,14 @@
     font-family: $main-font;
   }
 }
+
+button.close-modal {
+  background: none;
+}
+
+h2.add-event-heading {
+  text-align: center;
+  margin: 0 auto;
+  color: $color-main-font;
+  font-weight: 400;
+}

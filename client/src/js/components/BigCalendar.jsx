@@ -20,16 +20,21 @@ import { reqAddEvent } from '../actions/event-actions';
 
 const customStyles = {
   content: {
+    background: '#1F1F31',
     zIndex: 10,
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    border: 'none',
+    height: '300px',
+    boxShadow: 'box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5)'
   },
   overlay: {
-    zIndex: 9
+    zIndex: 9,
+    background: 'none'
   }
 };
 
@@ -177,9 +182,9 @@ EventAgenda({ event }) {
             style={ customStyles }
             contentLabel="Add an Event">
 
-            <h2>Add an event</h2>
+            <h2 className="add-event-heading">Add an event</h2>
             <EventForm submitFunc={ this.addEvent }/>
-            <button onClick={ this.closeModal }>Close</button>
+            <button onClick={ this.closeModal } className="close-modal"><i className="fa fa-times" aria-hidden="true"></i></button>
 
           </Modal>
       </div>

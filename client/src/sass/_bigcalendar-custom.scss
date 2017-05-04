@@ -3,7 +3,7 @@
   height: 640px;
   padding-left: 110px;
   padding-right: 110px;
-  padding-top:20px;
+  padding-top:10px;
 }
 
 .calendar {
@@ -82,12 +82,49 @@
   margin-top: -10px;
 
   .rbc-btn-group {
-    visibility: hidden;
+    // visibility: hidden;
   }
 
   .rbc-toolbar-label {
     font-family: $main-font;
     color: $color-main-font;
+  }
+}
+
+.toolbar-container {
+  position: relative;
+  z-index: 300;
+  height: 100px;
+}
+
+.back-next-buttons {
+  width: 400px;
+  position: relative;
+  height: 100px;
+  margin: 0 auto;
+
+  .label-date {
+    color: white;
+    position: absolute;
+    top: 10px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .btn-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: none;
+    outline: none;
+  }
+  .btn-next {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    outline: none;
+
   }
 }
 

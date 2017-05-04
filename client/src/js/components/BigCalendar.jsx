@@ -50,6 +50,50 @@ let MyCustomHeader = React.createClass({
   }
 })
 
+// CUSTOM toolbar
+
+const CustomToolbar = (toolbar) => {
+  const goToBack = () => {
+    toolbar.date.setMonth(toolbar.date.getMonth() - 1);
+    toolbar.onNavigate('prev');
+  };
+
+  const goToNext = () => {
+    toolbar.date.setMonth(toolbar.date.getMonth() + 1);
+    toolbar.onNavigate('next');
+  };
+
+  const goToCurrent = () => {
+    const now = new Date();
+    toolbar.date.setMonth(now.getMonth());
+    toolbar.date.setYear(now.getFullYear());
+    toolbar.onNavigate('current');
+  };
+
+  const label = () => {
+    const date = moment(toolbar.date);
+    return (
+      <span><b>{date.format('MMMM')}</b><span> {date.format('YYYY')}</span></span>
+    );
+  };
+
+  return (
+    <div className='toolbar-container'>
+
+      <div className='back-next-buttons'>
+        <label className='label-date'>{label()}</label>
+        <button className='btn-back' onClick={goToBack}>
+          <i className="fa fa-chevron-left"></i>
+        </button>
+        <button className='btn-next' onClick={goToNext}>
+          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  );
+};
+//CUSTOM TOOLBAR ENDS
+
 
 class Calendar extends Component {
 
@@ -102,7 +146,8 @@ EventAgenda({ event }) {
             event: this.Event,
             agenda: {
               event: this.EventAgenda
-            }
+            },
+            toolbar: CustomToolbar
           }}
           onSelectEvent={ event => console.log(event.title)}
           onSelectSlot={ (slotInfo) => console.log(

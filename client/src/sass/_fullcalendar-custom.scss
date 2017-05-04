@@ -30,6 +30,11 @@
   height: 640px;
 }
 
+.calendar {
+  width: 80vw;
+  height: 640px;
+}
+
 .fc th {
   text-align: left;
   color: $color-main-font;
@@ -95,3 +100,10 @@ td.fc-event-container a.fc-day-grid-event .fc-content {
     box-shadow: none;
   }
 }
+
+//
+// #c { width: 200px; height: 200px; border: solid 1px #ddd; }
+//
+// #dialog {
+//    display: none;
+// }

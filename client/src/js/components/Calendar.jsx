@@ -20,18 +20,6 @@ import {connect} from 'react-redux';
 
 import { findDOMNode } from 'react-dom';
 
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
-
 class Calendar extends Component {
 
   constructor() {
@@ -76,6 +64,9 @@ class Calendar extends Component {
         this.setState({
           modalIsOpen: true
         })
+
+        $('.event-modal').css({top: jsEvent.clientY+'px', left: jsEvent.clientX+document.body.scrollLeft+'px'});
+        console.log('mouse position', jsEvent.clientX, $(document.body).scrollLeft());
       }
 
       //
@@ -113,13 +104,13 @@ class Calendar extends Component {
   render() {
     return (
       <div ref="calendar" className="calendar">
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} contentLabel="Example Modal">
+        <Modal className="event-modal" overlayClassName="event-modal-overlay" isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Example Modal">
           <h2>Add an event</h2>
           <EventForm />
           <button onClick={this.closeModal}>close</button>
         </Modal>
 
-      <ul className="profile-info">
+      {/*<ul className="profile-info">
         <li>
           <span className="info-title">User Name : </span> Shuvo Habib
           </li>
@@ -133,7 +124,7 @@ class Calendar extends Component {
 
       <div className="ellipsis-click" onClick={this.handleToggle}>
         <p> CLICK ON MEEE </p>
-      </div>
+      </div>*/}
 
       </div>
     );

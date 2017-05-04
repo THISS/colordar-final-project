@@ -31,6 +31,26 @@ const customStyles = {
   }
 };
 
+
+let MyOtherNestedComponent = React.createClass({
+  render(){
+    return (<div>Back</div>)
+  }
+})
+
+let MyCustomHeader = React.createClass({
+  render(){
+    const { label } = this.props
+    return (
+      <div>
+        <div>{ label }</div>
+        <MyOtherNestedComponent />
+      </div>
+    )
+  }
+})
+
+
 class Calendar extends Component {
 
   constructor(props) {
@@ -90,7 +110,7 @@ EventAgenda({ event }) {
             `\nend: ${slotInfo.end.toLocaleString()}`
           )}
         />
-        
+
           <Modal
             isOpen={ this.state.modalIsOpen }
             onRequestClose={ this.closeModal }

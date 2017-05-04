@@ -25,16 +25,18 @@ export default function(state=initialState, action) {
   }
 
   const convertForFullCalendar = (event) => {
-    console.log('before',event);
+    const colours = { 1: 'deepskyblue', 2: 'seagreen', 3: 'lightgrey', 4: 'crimson', 5: 'yellow' };
     const convertedEvent = {
       title: event.name,
+      calendar_id: event.calendar_id,
       start: event.start_time,
       end: event.end_time,
-      color_id: event.color_id,
+      color: colours[event.color_id],
       location: event.location,
       id: event.id
     };
-    console.log('after',convertedEvent);
+    console.log('colour is', convertedEvent.color);
+
     return convertedEvent;
   }
 

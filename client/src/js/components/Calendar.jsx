@@ -77,6 +77,12 @@ class Calendar extends Component {
 
   }
 
+  componentDidUpdate() {
+    const { calendar } = this.refs;
+
+    $(calendar).fullCalendar('render');
+  }
+
   componentWillUnmount() {
     const {calendar} = this.refs;
 

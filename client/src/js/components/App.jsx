@@ -12,8 +12,8 @@ export default function App(props) {
   return (
     <Router>
       <div className="main-container sidebar-shown">
-        <Nav />
-        <Sidebar />
+        <Nav loggedIn={ true } />
+        <Sidebar groupMembers={[{id: 1}, {id: 2}]} />
         <Route path='/' >
           <div className="page-1">
             <Agenda />

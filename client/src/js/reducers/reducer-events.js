@@ -19,9 +19,23 @@ const initialState = {
 export default function(state=initialState, action) {
   const replace = function(val, index) {
     if (val.id === action.payload.id) {
-      return action.payload;
+      return convertForFullCalendar(action.payload);
     }
     return val;
+  }
+
+  const convertForFullCalendar = (event) => {
+    console.log('before',event);
+    const convertedEvent = {
+      title: event.name,
+      start: event.start_time,
+      end: event.end_time,
+      color_id: event.color_id,
+      location: event.location,
+      id: event.id
+    };
+    console.log('after',convertedEvent);
+    return convertedEvent;
   }
 
   switch(action.type) {
@@ -34,12 +48,12 @@ export default function(state=initialState, action) {
     case GET_MASTER:
       return {
         ...state,
-        events: action.payload.events
+        events: action.payload.events.map(convertForFullCalendar)
       };
     case GET_CALENDAR_EVENTS:
       return {
         ...state,
-        events: action.payload.events
+        events: action.payload.events.map(convertForFullCalendar)
       };
     case GET_EVENT_BY_ID:
       return {
@@ -50,7 +64,7 @@ export default function(state=initialState, action) {
     case POST_EVENT:
       return {
         ...state,
-        events: state.events.concat(action.payload)
+        events: state.events.concat(convertForFullCalendar(action.payload))
       };
     case UPDATE_EVENT:
       return {

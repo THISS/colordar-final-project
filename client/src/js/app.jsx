@@ -8,6 +8,10 @@ import store from './store';
 // Our component imports
 import App from './components/App.jsx';
 
+import * as actions from './actions';
+window.action = actions;
+window.st = store;
+
 ReactDOM.render(
   <Provider store={ store }>
     <App />

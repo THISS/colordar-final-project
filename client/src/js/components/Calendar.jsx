@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 // Import fullcalendar.js
 import fullcalendar from 'fullcalendar';
@@ -22,8 +22,8 @@ import { findDOMNode } from 'react-dom';
 
 class Calendar extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       modalIsOpen: false
@@ -74,8 +74,8 @@ class Calendar extends Component {
         console.log('mouse position', jsEvent.clientX, $(document.body).scrollLeft());
       }
     });
-  }
 
+  }
 
   componentWillUnmount() {
     const {calendar} = this.refs;

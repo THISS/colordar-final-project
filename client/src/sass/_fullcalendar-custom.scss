@@ -1,30 +1,3 @@
-// .calendar-container {
-//   position: absolute;
-//   right:-70rem;
-// }
-//
-// .modal {
-//   display:none;
-//   background-color: rgba(0, 0, 0, 0.4);
-// }
-//
-// .close {
-//   color:red;
-//   width:40px;
-// }
-//
-// .active {
-//   display:block;
-// }
-//
-// .event-active {
-//   background-color: blue;
-// }
-//
-// .ReactModal__Overlay {
-//   z-index: 1000;
-// }
-
 .calendar-container {
   width: 80vw;
   height: 640px;
@@ -56,7 +29,7 @@
 
 .fc td.fc-today {
   border-style: none;
-  background: $color-main-dark;
+  background: none;
 }
 
 .fc-row table thead tr th.fc-day-header {
@@ -99,6 +72,16 @@ td.fc-event-container a.fc-day-grid-event .fc-content {
     color: $color-main-font;
     box-shadow: none;
   }
+}
+
+.fc-today.fc-state-highlight .fc-day-number {
+  color: $color-button-green !important;
+  border: 2px solid $color-button-green;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 
 //

@@ -44,29 +44,35 @@ class EventForm extends Component {
     }
 
     return (
-      <form name="CreateEventForm">
+      <form name="CreateEventForm" className="create-event-form">
 
-        <label>
-          Event title:
-          <input ref="eventtitle" type="text"  />
-        </label>
+        <input placeholder="Title" ref="eventtitle" type="text" className="form-input" />
 
-        <label>
-          Start time:
-          <Flatpickr ref="eventstart"
-            onChange={eventEndOnChange}
-          />
-        </label>
+        <br />
 
-        <label>
-          End time:
-          <Flatpickr ref="eventend"
-            onChange={eventStartOnChange}
-          />
-        </label>
+        <input placeholder="Location" ref="eventlocation" type="text" className="form-input" />
 
-        <input type="submit" value="Submit" onClick={this.handleSubmit.bind(this)}/>
+        <br />
+
+        <Flatpickr ref="eventstart"
+          onChange={eventEndOnChange}
+          className="form-input"
+          placeholder="Starts"
+        />
+
+        <br />
+
+        <Flatpickr ref="eventend"
+          onChange={eventStartOnChange}
+          className="form-input"
+          placeholder="Ends"
+        />
+
+        <br />
+
+        <input type="submit" value="Submit" className="form-submit" onClick={this.handleSubmit.bind(this)}/>
       </form>
+
     );
   }
 }

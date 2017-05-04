@@ -63,29 +63,16 @@ class Calendar extends Component {
       dayClick: (date, jsEvent, view) => {
         this.setState({
           modalIsOpen: true
+
+          // callback function contains thibgns you want to happen after state is setState
+          // set position inside callback
         })
 
-        $('.event-modal').css({top: jsEvent.clientY+'px', left: jsEvent.clientX+document.body.scrollLeft+'px'});
+        setTimeout(function(){$('.event-modal').css({top: jsEvent.clientY+'px', left: jsEvent.clientX+document.body.scrollLeft+'px'}); }, 0);
+        setTimeout(function(){$('.flatpickr-calendar').css({top: jsEvent.clientY+'px', left: jsEvent.clientX+document.body.scrollLeft+'px'}); }, 0);
+
         console.log('mouse position', jsEvent.clientX, $(document.body).scrollLeft());
       }
-
-      //
-      // eventClick: function (calEvent, jsEvent, view) {
-      //   console.log(typeof $("#dialog").dialog);
-      //   $("#dialog").dialog({
-      //       autoOpen: false,
-      //     }
-      //   );
-      // }
-
-      // dayClick: function(date, allDay, jsEvent, view) {
-      //   $("#dialog").dialog("option", "position", {
-      //     my: "bottom-10",
-      //     of: jsEvent
-      //   });
-      //   $("#dialog").dialog("open");
-      // }
-
     });
   }
 
@@ -105,27 +92,9 @@ class Calendar extends Component {
     return (
       <div ref="calendar" className="calendar">
         <Modal className="event-modal" overlayClassName="event-modal-overlay" isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Example Modal">
-          <h2>Add an event</h2>
           <EventForm />
-          <button onClick={this.closeModal}>close</button>
+          <span onClick={this.closeModal} className="close-modal"><i className="fa fa-times" aria-hidden="true"></i></span>
         </Modal>
-
-      {/*<ul className="profile-info">
-        <li>
-          <span className="info-title">User Name : </span> Shuvo Habib
-          </li>
-      </ul>
-
-      <ul className="profile-info additional-profile-info-list" ref="toggle">
-        <li>
-          <span className="info-email">Office Email</span>   me@shuvohabib.com
-        </li>
-      </ul>
-
-      <div className="ellipsis-click" onClick={this.handleToggle}>
-        <p> CLICK ON MEEE </p>
-      </div>*/}
-
       </div>
     );
   }

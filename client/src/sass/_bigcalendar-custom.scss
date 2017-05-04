@@ -128,6 +128,19 @@
   }
 }
 
+.rbc-event {
+  background: none;
+  border-radius: 100px;
+  color: $color-main-dark !important;
+  padding: 1px 5px;
+
+  .rbc-event-content {
+    span {
+    }
+  }
+}
+
+
 .fc-row table thead tr th.fc-day-header {
   height: 60px;
 }

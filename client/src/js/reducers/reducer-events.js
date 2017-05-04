@@ -35,7 +35,6 @@ export default function(state=initialState, action) {
       location: event.location,
       id: event.id
     };
-    console.log('colour is', convertedEvent.color);
 
     return convertedEvent;
   }

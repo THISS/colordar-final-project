@@ -17,6 +17,9 @@ class Sidebar extends Component {
             <i className="fa fa-comments" aria-hidden="true"></i>
           </span>
         </div>
+
+        <iframe className="chat-box" src="http://localhost:3002" width="400" height="300"></iframe>
+
         <span className="round-button add-button">
           <i className="fa fa-plus" aria-hidden="true"></i>
         </span>

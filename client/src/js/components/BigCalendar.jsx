@@ -126,26 +126,31 @@ class Calendar extends Component {
   }
 
   Event({ event }) {
-    return (
-      <span style={{ backgroundColor: event.color }}>
-        <strong>
-        { event.title }
-        </strong>
-        { event.location && (':  ' + event.location)}
-      </span>
-    )
-  }
+  return (
+    <div className="rbc-row-segment" style={{ backgroundColor: event.color, color: 'white', borderRadius: 100+'px', paddingLeft: 10+'px', paddingRight: 10+'px' }}>
+      <div className="rbc-event-content">
+        <span style={{ backgroundColor: 'none' }}>
+          { event.title }
+          {/*{ event.location && (':  ' + event.location)}*/}
+        </span>
+      </div>
+    </div>
+  )
+}
 
-  addNewEventModal(selectSlot) {
-    this.openModal();
-  }
+addNewEventModal(selectSlot) {
+  this.openModal();
+}
 
-  EventAgenda({ event }) {
-    return <span>
+
+EventAgenda({ event }) {
+  return(
+    <span>
       <em style={{ color: 'crimson'}}>{event.title}</em>
       <p>{ event.location }</p>
     </span>
-  }
+  )
+}
 
   render() {
     return (

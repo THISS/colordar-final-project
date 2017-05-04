@@ -25,7 +25,7 @@ export default function(state=initialState, action) {
   }
 
   const convertForFullCalendar = (event) => {
-    const colours = { 1: 'deepskyblue', 2: 'seagreen', 3: 'lightgrey', 4: 'crimson', 5: 'yellow' };
+    const colours = { 1: 'deepskyblue', 2: 'seagreen', 3: '#00DB9A', 4: 'crimson', 5: 'yellow' };
     const convertedEvent = {
       title: event.name,
       calendar_id: event.calendar_id,

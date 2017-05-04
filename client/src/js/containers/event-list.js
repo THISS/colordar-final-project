@@ -10,7 +10,6 @@ class EventList extends Component {
   }
 
   render(){
-    console.log(this.props.events)
     return(
       <tbody>
       { this.props.events.map(event => (

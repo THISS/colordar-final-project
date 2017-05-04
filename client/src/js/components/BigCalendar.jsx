@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import moment from 'moment';
+window.moment = moment;
 // Import fullcalendar.js
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -32,33 +33,68 @@ const customStyles = {
 
 class Calendar extends Component {
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      modalIsOpen: false
-    };
+  //   this.state = {
+  //     modalIsOpen: false
+  //   };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+  //   this.openModal = this.openModal.bind(this);
+  //   this.closeModal = this.closeModal.bind(this);
+  // }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
+  // openModal() {
+  //   this.setState({ modalIsOpen: true });
+  // }
 
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
+  // closeModal() {
+  //   this.setState({modalIsOpen: false});
+  // }
+
+  Event({ event }) {
+  return (
+    <span style={{ backgroundColor: event.color }}>
+      <strong>
+      { event.title }
+      </strong>
+      { event.location && (':  ' + event.location)}
+    </span>
+  )
+}
+
+EventAgenda({ event }) {
+  return <span>
+    <em style={{ color: 'crimson'}}>{event.title}</em>
+    <p>{ event.location }</p>
+  </span>
+}
 
   render() {
     return (
       <div ref="calendar" className="calendar">
         <BigCalendar
-          events={this.props.events}
-          defaultDate={new Date(2017, 4, 4)}
+          events={ this.props.events }
+          selectable
+          onSelectEvent={ event => console.log(event.title)}
+          onSelectSlot={ (slotInfo) => console.log(
+            `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+            `\nend: ${slotInfo.end.toLocaleString()}`
+          )}
+          defaultDate={ new Date() }
+          defaultView='week'
+          views={{ 
+            month: true,
+            week: true 
+          }}
+          components={{
+            event: this.Event,
+            agenda: {
+              event: this.EventAgenda
+            }
+          }}
         />
-          <Modal 
+          {/*<Modal 
             isOpen={ this.state.modalIsOpen } 
             onRequestClose={ this.closeModal } 
             style={ customStyles } 
@@ -71,7 +107,7 @@ class Calendar extends Component {
             </form>
             <button onClick={this.closeModal}>Close</button>
 
-          </Modal>
+          </Modal>*/}
       </div>
     );
   }

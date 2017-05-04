@@ -10,35 +10,35 @@ class EventList extends Component {
   }
 
   render(){
+    console.log(this.props.events)
     return(
-      <div>
-        <div className="today-event-line"></div>
-        <ul>
-          {this.props.events.map(event => (
-            <li key={event.id} className="today-events-list">
-              <p className="today-event-time">{moment(event.start).format('LT')}</p>
-              <div className="today-event-seperator">
-                <div className="today-event-circle"></div>
-              </div>
-              <p className="today-event-title">{event.title}</p>
-            </li>
-            )
-          )}
-        </ul>
-      </div>
+      <tbody>
+      { this.props.events.map(event => (
+          <tr key={ event.id }>
+            <td>
+              <p className="agenda-time">{ moment(event.start).format('LT') }</p>
+            </td>
+            <td className="agenda-list-group">
+              <strong className="agenda-title">{ event.title }</strong>
+              <p className="agenda-location">{ event.location }</p>
+            </td>
+          </tr>
+        )
+      )}
+      </tbody>
     );
   }
 }
 
 // Send a piece of state from your store to your component as props
-function eventsForCurrentDate({ events, currentDate }) {
-  const todaysEvents = events.events.filter(({start_time, end_time}) => {
-    return moment(start_time).isSameOrAfter(moment(currentDate).startOf('day')) &&
-      moment(end_time).isSameOrBefore(moment(currentDate).endOf('day'))
+function eventsForCurrentDate({ events, currentDate, calendars }) {
+  const todaysEvents = events.events.filter(({ start, end }) => {
+    return moment(start).isSameOrAfter(moment(currentDate).startOf('day')) &&
+      moment(end).isSameOrBefore(moment(currentDate).endOf('day'))
   });
   return {
     events: todaysEvents,
-    calendars: state.calendars
+    calendars: calendars
   };
 }
 

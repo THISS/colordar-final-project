@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
+import moment from 'moment';
 // Import fullcalendar.js
-import fullcalendar from 'fullcalendar';
-import 'fullcalendar/dist/fullcalendar.css';
+import BigCalendar from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+BigCalendar.setLocalizer(
+  BigCalendar.momentLocalizer(moment)
+);
 
 import 'react-dates/lib/css/_datepicker.css';
-import moment from 'moment';
 import $ from 'jquery';
 import Modal from 'react-modal';
 
@@ -48,51 +51,13 @@ class Calendar extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  renderCalendar(events) {
-    const { calendar } = this.refs;
-    setTimeout(() => {
-      console.log(events);
-      $(calendar).fullCalendar({
-        header: {
-          left: 'prev',
-          center: 'title',
-          right : 'next'
-        },
-
-        events: events,
-        editable: true,
-        selectable: true,
-        height: 'parent',
-
-        dayClick: function(date, allDay, jsEvent, view) {
-          $("#dialog").dialog("option", "position", {
-            my: "bottom-10",
-            of: jsEvent
-          });
-          $("#dialog").dialog("open");
-        }
-      });
-    }, 1);
-  }
-
-  componentDidUpdate() {
-    this.renderCalendar(this.props.events);
-  }
-
-  componentDidMount() {
-    this.renderCalendar(this.props.events);
-  }
-
-  componentWillUnmount() {
-    const { calendar } = this.refs;
-
-    $(calendar).fullCalendar('destroy');
-  }
-
   render() {
     return (
       <div ref="calendar" className="calendar">
-        <div>
+        <BigCalendar
+          events={this.props.events}
+          defaultDate={new Date(2017, 4, 4)}
+        />
           <Modal 
             isOpen={ this.state.modalIsOpen } 
             onRequestClose={ this.closeModal } 
@@ -107,7 +72,6 @@ class Calendar extends Component {
             <button onClick={this.closeModal}>Close</button>
 
           </Modal>
-        </div>
       </div>
     );
   }

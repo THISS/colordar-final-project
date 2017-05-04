@@ -1,7 +1,5 @@
-.chat-box {
-  border: none;
-}
-
-iframe {
-  border: none;
+iframe.chat-box {
+  position: absolute;
+  left: 60px;
+  top: 60px;
 }

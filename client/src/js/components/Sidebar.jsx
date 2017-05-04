@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
+import jQuery from 'jquery';
+import { findDOMNode } from 'react-dom';
+
+
 
 class Sidebar extends Component {
+  componentDidMount(){
+    const el = findDOMNode(this.refs.toggle);
+    $(el).slideToggle();
+  }
+  handleToggle = () => {
+    const el = findDOMNode(this.refs.toggle);
+    $(el).slideToggle();
+  };
+
   render() {
     const sideHeads = this.props.groupMembers.map((elm) => {
       return (
@@ -13,12 +27,12 @@ class Sidebar extends Component {
     return (
       <div className="sidebar">
         <div className="nav-height-container">
-          <span className="round-button chat-button">
+          <span className="round-button chat-button" onClick={this.handleToggle}>
             <i className="fa fa-comments" aria-hidden="true"></i>
           </span>
         </div>
 
-        <iframe className="chat-box" src="http://localhost:3002" width="400" height="300"></iframe>
+        <iframe ref="toggle" className="chat-box" src="http://localhost:3002" width="400" height="300" frameBorder="0"></iframe>
 
         <span className="round-button add-button">
           <i className="fa fa-plus" aria-hidden="true"></i>

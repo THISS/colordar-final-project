@@ -6,12 +6,12 @@ import Agenda from './Agenda.jsx';
 import DayInfo from './DayInfo.jsx';
 import Bubbles from './Bubbles.jsx';
 import CalendarContainer from './CalendarContainer.jsx';
+import GroupsContainer from './GroupsContainer.jsx';
 
 export default function App(props) {
   return (
     <Router>
       <div className="main-container sidebar-shown">
-
         <Nav />
         <Sidebar />
         <Route path='/' >
@@ -26,6 +26,10 @@ export default function App(props) {
             <CalendarContainer />
           </div>
         </Route>
+
+        <div className="page-3">
+          <GroupsContainer />
+        </div>
       </div>
     </Router>
   );

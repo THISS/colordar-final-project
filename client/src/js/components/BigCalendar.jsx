@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import moment from 'moment';
+window.moment = moment;
 // Import fullcalendar.js
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -51,6 +52,24 @@ class Calendar extends Component {
     this.setState({modalIsOpen: false});
   }
 
+  Event({ event }) {
+  return (
+    <span style={{ backgroundColor: event.color }}>
+      <strong>
+      { event.title }
+      </strong>
+      { event.location && (':  ' + event.location)}
+    </span>
+  )
+}
+
+EventAgenda({ event }) {
+  return <span>
+    <em style={{ color: 'crimson'}}>{event.title}</em>
+    <p>{ event.location }</p>
+  </span>
+}
+
   render() {
     return (
       <div ref="calendar" className="calendar">
@@ -58,7 +77,18 @@ class Calendar extends Component {
           popup
           selectable
           events={this.props.events}
-          defaultDate={new Date(2017, 4, 4)}
+          defaultDate={new Date()}
+          components={{
+            event: this.Event,
+            agenda: {
+              event: this.EventAgenda
+            }
+          }}
+          onSelectEvent={ event => console.log(event.title)}
+          onSelectSlot={ (slotInfo) => console.log(
+            `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+            `\nend: ${slotInfo.end.toLocaleString()}`
+          )}
         />
           <Modal
             isOpen={ this.state.modalIsOpen }

@@ -11,7 +11,7 @@
   "scripts": {
     "front": "node front-server.js",
     "back": "node back-server.js",
-    "mid": "rm ./client/public/scripts/main.js && webpack --config ./webpack.config.js --progress && node back-server.js",
+    "mid": "webpack --config ./webpack.config.js --progress && node back-server.js",
     "heroku-prebuild": "echo pre build time",
     "heroku-postbuild": "bash ./postinstall.sh",
     "start": "node back-server.js"

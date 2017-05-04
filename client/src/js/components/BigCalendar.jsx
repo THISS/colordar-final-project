@@ -55,13 +55,15 @@ class Calendar extends Component {
     return (
       <div ref="calendar" className="calendar">
         <BigCalendar
+          popup
+          selectable
           events={this.props.events}
           defaultDate={new Date(2017, 4, 4)}
         />
-          <Modal 
-            isOpen={ this.state.modalIsOpen } 
-            onRequestClose={ this.closeModal } 
-            style={ customStyles } 
+          <Modal
+            isOpen={ this.state.modalIsOpen }
+            onRequestClose={ this.closeModal }
+            style={ customStyles }
             contentLabel="Add an Event">
 
             <h2>Add an event</h2>

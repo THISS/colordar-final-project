@@ -37,7 +37,7 @@ class Bubbles extends Component {
         </span>
         <span className="bubble bubble-4"></span>
         <span className="bubble bubble-5"></span>
-        <span className="bubble bubble-6">
+        <span className="bubble bubble-6 bubble-active">
           <img src="https://s-media-cache-ak0.pinimg.com/originals/d8/69/3a/d8693a767c0752ab495a1dc353f4c3c5.jpg" alt="avatar" />
           <span className="notification">2</span>
         </span>

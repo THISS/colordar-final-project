@@ -41,6 +41,7 @@
     "react-addons-shallow-compare": "^15.5.2",
     "react-big-calendar": "^0.13.0",
     "react-bootstrap": "^0.31.0",
+    "react-color": "^2.11.7",
     "react-dates": "^10.1.1",
     "react-dom": "^15.5.4",
     "react-flatpickr": "^3.3.0",

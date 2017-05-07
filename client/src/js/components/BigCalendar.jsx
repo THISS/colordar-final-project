@@ -197,7 +197,6 @@ function mapStateToProps(state) {
   return { events: state.events.events };
 }
 
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     reqAddEvent: reqAddEvent

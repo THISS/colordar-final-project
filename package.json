@@ -39,7 +39,7 @@
     "knex": "^0.12.9",
     "knex-logger": "^0.1.0",
     "moment": "^2.18.1",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.7.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.5",

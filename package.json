@@ -5,16 +5,18 @@
   "repository": "git@github.com:THISS/colordar-final-project.git",
   "author": "Brenton Holswich <brenton.holswich@gmail.com>",
   "engines": {
-    "node": "7.9.0"
+    "node": "8.9.0"
   },
   "license": "MIT",
   "scripts": {
-    "front": "node front-server.js",
-    "back": "node back-server.js",
-    "mid": "webpack --config ./webpack.config.js --progress && node back-server.js",
+    "front": "node ./client/front-server.js",
+    "back": "node ./server/back-server.js",
+    "debug-back": "node --inspect=9229 ./server/back-server.js",
+    "debug-front": "node --inspect=9229 ./client/front-server.js",
+    "mid": "webpack --config ./webpack.config.js --progress && node ./server/back-server.js",
     "heroku-prebuild": "echo pre build time",
     "heroku-postbuild": "bash ./postinstall.sh",
-    "start": "node back-server.js"
+    "start": "npm run back && npm run front"
   },
   "dependencies": {
     "babel-core": "^6.26",
@@ -30,6 +32,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "extract-text-webpack-plugin": "^3.0.2",
+    "jsonwebtoken": "^8.1.1",
     "knex": "^0.14.3",
     "knex-logger": "^0.1.0",
     "moment": "^2.20.1",

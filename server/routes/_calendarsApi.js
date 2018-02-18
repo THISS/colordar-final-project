@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = function(db) {
+module.exports = function(db, log) {
   const errorHandler = (error, res) => {
-    console.log(error);
+    log.error(error);
     res.json({error: 'something funky went down'});
   };
   

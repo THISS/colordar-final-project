@@ -2,21 +2,21 @@ const express = require('express');
 const router = express.Router();
 const uuid = require('uuid/v4');
 
-module.exports = function(db) {
+module.exports = function(db, log) {
   
   const errorHandler = (error, res) => {
-    console.log(error);
+    log.error(error);
     res.json({error: 'something funky went down'});
   };
 
   const emailUsers = (email, uurl) => { // TODO: implement this feature
-    console.log('email > email', email);
-    console.log('email > uurl', uurl);
+    log.info('email > email', email);
+    log.info('email > uurl', uurl);
   };
 
   const notifyUsers = (email, uurl) => { // TODO: implement this feature
-    console.log('notify > email', email);
-    console.log('notify > uurl', uurl);
+    log.info('notify > email', email);
+    log.info('notify > uurl', uurl);
   };
   
   router.get('/',(req, res) => {

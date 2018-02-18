@@ -4,3 +4,4 @@ node_modules
 main.css
 main.js
 server/logs/*
+package-lock.json

@@ -3,3 +3,4 @@ node_modules
 .env
 main.css
 main.js
+server/logs/*

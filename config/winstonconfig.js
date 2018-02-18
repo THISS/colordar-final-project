@@ -1,5 +1,5 @@
 module.exports = function(Winston) {
-  const logDir = `${__dirname}/server/logs/`
+  const logDir = `${__dirname}/../server/logs/`
   return {
     transports: [
       new Winston.transports.File({

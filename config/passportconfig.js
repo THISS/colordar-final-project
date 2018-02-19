@@ -3,10 +3,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const SIGNUPMESSAGE = 'signupMessage';
 const LOGINMESSAGE = 'loginMessage';
 const BADLOGINMESSAGE = 'Either the email or password are incorrect';
-const BADSIGNUPMESSAGE = 'We are struggling to process this request, \
-you may want to check the password or if you already have an account';
+const BADSIGNUPMESSAGE = `We are struggling to process this request,
+you may want to check the password or if you already have an account`;
 
-module.exports = function(passport, dbHelpers, log) {
+module.exports = (passport, dbHelpers, log) => {
 
   passport.serializeUser(function(user, done) {
     done(null, user.id);

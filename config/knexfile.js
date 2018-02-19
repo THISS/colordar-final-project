@@ -17,11 +17,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './server/db/migrations',
+      directory: `${__dirname}/../server/db/migrations`,
       tableName: 'migrations'
     },
     seeds: {
-      directory: './server/db/seeds'
+      directory: `${__dirname}/../server/db/seeds`
     }
   },
   production: {
@@ -32,11 +32,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './server/db/migrations',
+      directory: `${__dirname}/../server/db/migrations`,
       tableName: 'migrations'
     },
     seeds: {
-      directory: './server/db/seeds'
+      directory: `${__dirname}/../server/db/seeds`
     }
   }
 }

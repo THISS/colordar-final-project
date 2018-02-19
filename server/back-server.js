@@ -54,6 +54,19 @@ const apiRoutes = require('./routes/apiRoutes')(dbHelpers, passport, logger);
 // Mount the routers
 app.use('/api', apiRoutes);
 
+// error handling
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  logger.error(err);
+  res.json({ error: err });
+});
+
+app.use((req, res) => {
+  logger.warn(`Could not find route ${req.url}`);
+  res.status(400);
+  res.json({ error: 'Can\'t find that, sorry' })
+});
+
 server.listen(PORT, () => {
   console.log(`Colordar is Online: on port ${server.address().port}`);
 })

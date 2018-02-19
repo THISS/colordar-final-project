@@ -1,20 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = function(db, passport, log, loggedInMiddleware) {
+module.exports = (db, passport, log, loggedInMiddleware) => {
 
   const errorHandler = (error, res) => {
     log.error(error);
     res.json({error: 'something funky went down'});
   };
 
-  router.get('/',(req, res) => {
-    res.render('index');
-  });
-
   // Register
   router.post('/', (req, res, next) => {
-    passport.authenticate('local-signup', function(err, user, info) {
+    passport.authenticate('local-signup', (err, user, info) => {
       if (err) { 
         return next(err); 
       }
@@ -43,7 +39,7 @@ module.exports = function(db, passport, log, loggedInMiddleware) {
     //   password: 'Brentonpass'
     // };
 
-    passport.authenticate('local-login', function(err, user, info) {
+    passport.authenticate('local-login', (err, user, info) => {
       if (err) { 
         return next(err); 
       }
@@ -53,7 +49,7 @@ module.exports = function(db, passport, log, loggedInMiddleware) {
         return res.status(401).json(res.locals); 
       }
 
-      req.logIn(user, function(err) {
+      req.logIn(user, (err) => {
         if (err) {
           return next(err); 
         }

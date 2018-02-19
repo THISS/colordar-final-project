@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const uuid = require('uuid/v4');
 
-module.exports = function(db, log) {
+module.exports = (db, log) => {
   
   const errorHandler = (error, res) => {
     log.error(error);

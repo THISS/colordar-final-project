@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = function(db, log) {
+module.exports = (db, log) => {
   
   const errorHandler = (error, res) => {
     log.error(error);

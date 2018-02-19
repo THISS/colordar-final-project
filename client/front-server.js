@@ -1,10 +1,10 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var config = require('../webpack.config');
 path = require('path');
 
 new WebpackDevServer(webpack(config), {
-  contentBase: path.join(__dirname, "client/public"),
+  contentBase: path.join(__dirname, "public"),
   publicPath: config.output.publicPath,
   watchOptions: {
     ignored: [/node_modules/,/server/],

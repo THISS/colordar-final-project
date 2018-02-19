@@ -7,24 +7,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Front End",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "debug-front"
-      ],
-      "port": 9229
+      "name": "Debug Back End",
+      "program": "${workspaceFolder}/server/back-server.js"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Back End",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "debug-back"
-      ],
-      "port": 9229
-    }
+      "name": "Debug Front End",
+      "program": "${workspaceFolder}/client/front-server.js"
+    },
   ]
 }

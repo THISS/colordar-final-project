@@ -3,9 +3,14 @@ import { SliderPicker } from 'react-color';
 
 
 class GroupForm extends Component {
-  state = {
-   color: '#fff',
-  };
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      color: '#fff'
+    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -22,7 +27,7 @@ class GroupForm extends Component {
     console.log(groupName, groupColor);
   }
 
-  handleChangeComplete = (color) => {
+  handleChangeComplete(color) {
     this.setState({ color: color.hex });
     console.log(this.state);
   };

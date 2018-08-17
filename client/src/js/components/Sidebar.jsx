@@ -6,11 +6,12 @@ import { findDOMNode } from 'react-dom';
 
 
 class Sidebar extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const el = findDOMNode(this.refs.toggle);
     $(el).slideToggle();
   }
-  handleToggle = () => {
+
+  handleToggle() {
     const el = findDOMNode(this.refs.toggle);
     $(el).slideToggle();
   };

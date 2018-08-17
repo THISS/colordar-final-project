@@ -9,14 +9,15 @@
   },
   "license": "MIT",
   "scripts": {
-    "front": "node ./client/front-server.js",
-    "back": "node ./server/back-server.js",
-    "debug-back": "node --inspect ./server/back-server.js",
-    "debug-front": "node --inspect ./client/front-server.js",
-    "mid": "webpack --config ./webpack.config.js --progress && node ./server/back-server.js",
+    "dev:api": "node ./server/back-server.js",
+    "dev:client": "webpack-dev-server --progress",
+    "debug:api": "node --inspect ./server/back-server.js",
+    "dev:build": "webpack",
+    "prod:build": "NODE_ENV=production webpack --progress -p",
+    "prod:server": "NODE_ENV=production node server",
+    "start": "npm run dev:api && npm run dev:client",
     "heroku-prebuild": "echo pre build time",
-    "heroku-postbuild": "bash ./postinstall.sh",
-    "start": "npm run back && npm run front"
+    "heroku-postbuild": "bash ./postinstall.sh"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -32,6 +33,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "extract-text-webpack-plugin": "^3.0.2",
+    "jquery": "^3.3.1",
     "jsonwebtoken": "^8.3.0",
     "knex": "^0.15.2",
     "knex-logger": "^0.1.0",
@@ -66,6 +68,7 @@
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
+    "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   }
 }

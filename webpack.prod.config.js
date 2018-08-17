@@ -7,6 +7,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
+  mode: "production",
   entry: path.resolve(__dirname, 'client/src/index.js'),
   output: {
     path: path.resolve(__dirname, 'client/public/scripts'),
@@ -53,10 +54,6 @@ module.exports = {
         screw_ie8: true
       },
       comments: false
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      BROWSER: JSON.stringify(true)
     })
   ]
 };

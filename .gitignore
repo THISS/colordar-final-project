@@ -6,3 +6,4 @@ main.js
 server/logs/*
 package-lock.json
 .vscode/*
+client/public/*

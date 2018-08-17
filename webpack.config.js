@@ -1,45 +1,53 @@
-var debug = process.env.NODE_ENV !== "production";
-var webpack = require('webpack');
-var path = require('path');
+const env = process.env.NODE_ENV;
+const debug = env !== "production";
+const path = require('path');
+
+const paths = {
+  app: path.resolve(__dirname, "client/src/"),
+  styles: path.resolve(__dirname, 'client/src/sass/'),
+  build: path.resolve(__dirname, 'client/public/'),
+};
 
 module.exports = {
+  mode: env,
   devtool: debug ? "inline-sourcemap" : false,
-  entry: [
-    // "webpack-dev-server/client?http://localhost:3000",
-    "./client/src/index.js"
-  ],
+  devServer: {
+    contentBase: paths.build,
+    host: '0.0.0.0',
+    port: 8080,
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000,
+      ignored: /(node_modules|server)/
+    },
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  },
+  entry: {
+    app: path.join(paths.app, "index.js")
+  },
   output: {
-    path: path.resolve(__dirname, "client/public/scripts"),
-    filename: "main.js",
-    publicPath: '/scripts/'
+    publicPath: '/',
+    filename: 'js/[name]-generated.js',
+    path: paths.build,
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react']
+          }
         }
       },
       {
         test: /\.s?css$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"]
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
-  },
-  plugins: debug ? [] : [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false
-    })
-  ],
+  }
 };

@@ -45,7 +45,7 @@ module.exports = (passport, dbHelpers, log) => {
             if (user.length > 0) {
               return done(null, false, BADSIGNUPMESSAGE);
             }
-            // other wise we need to create this user
+            // otherwise we need to create this user
             return dbHelpers.users.registerUserLocal({
               first_name,
               email,
@@ -54,7 +54,6 @@ module.exports = (passport, dbHelpers, log) => {
           })
           .then(addedSuccessfully => {
             if (addedSuccessfully) {
-              log.info(`addedSuccessfully - passportconfig.js line 57: ${addedSuccessfully[0]}`);
               return done(null, addedSuccessfully[0]);
             }
           })

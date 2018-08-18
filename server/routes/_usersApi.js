@@ -1,73 +1,68 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db, passport, log, loggedInMiddleware) => {
-
   const errorHandler = (error, res) => {
     log.error(error);
-    res.json({error: 'something funky went down'});
+    res.json({ error: "something funky went down" });
   };
 
   // Register
-  router.post('/', (req, res, next) => {
-    passport.authenticate('local-signup', (err, user, info) => {
-      if (err) { 
-        return next(err); 
+  router.post("/", (req, res, next) => {
+    passport.authenticate("local-signup", (err, user, info) => {
+      if (err) {
+        return next(err);
       }
+
       if (!user) {
         res.locals.loggedIn = false;
-        res.locals.message = req.flash('signupMessage');
-        return res.status(401).json(res.locals); 
+        res.locals.message = info.message;
+        return res.status(401).json(res.locals);
       }
 
       req.logIn(user, function(err) {
         if (err) {
-          return next(err); 
+          return next(err);
         }
+        
         res.locals.loggedIn = true;
         return res.json(res.locals);
       });
-
     })(req, res, next);
-
   });
 
   // Login
-  router.put('/login', (req, res, next) => {
-    // req.body = {
-    //   email: 'brenton@mildmovies.com',
-    //   password: 'Brentonpass'
-    // };
+  router.put("/login", (req, res, next) => {
 
-    passport.authenticate('local-login', (err, user, info) => {
-      if (err) { 
-        return next(err); 
+    passport.authenticate("local-login", (err, user, info) => {
+      if (err) {
+        return next(err);
       }
+
       if (!user) {
         res.locals.loggedIn = false;
-        res.locals.message = req.flash('loginMessage');
-        return res.status(401).json(res.locals); 
+        res.locals.message = info.message;
+        return res.status(401).json(res.locals);
       }
 
-      req.logIn(user, (err) => {
+      req.logIn(user, err => {
         if (err) {
-          return next(err); 
+          return next(err);
         }
         res.locals.loggedIn = true;
         return res.json(res.locals);
       });
-
     })(req, res, next);
-
   });
+
   // Logout
-  router.put('/logout', (req, res) => {
+  router.put("/logout", (req, res) => {
     req.logOut();
     res.locals.loggedIn = false;
     res.json(res.locals);
   });
 
-  router.get('/profile', loggedInMiddleware, (req, res) => {
+  router.get("/profile", loggedInMiddleware, (req, res) => {
     // return the user object
     const user = req.user[0];
     res.locals.user = {
@@ -87,4 +82,4 @@ module.exports = (db, passport, log, loggedInMiddleware) => {
   // TODO: google callback
 
   return router;
-}
+};

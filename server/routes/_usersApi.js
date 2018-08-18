@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = (db, passport, log, loggedInMiddleware) => {
   const errorHandler = (error, res) => {
     log.error(error);
-    res.json({ error: "something funky went down" });
+    return res.json({ error: "something funky went down" });
   };
 
   // Register
@@ -59,7 +59,7 @@ module.exports = (db, passport, log, loggedInMiddleware) => {
   router.put("/logout", (req, res) => {
     req.logOut();
     res.locals.loggedIn = false;
-    res.json(res.locals);
+    return res.json(res.locals);
   });
 
   router.get("/profile", loggedInMiddleware, (req, res) => {
@@ -70,7 +70,7 @@ module.exports = (db, passport, log, loggedInMiddleware) => {
       first_name: user.first_name,
       profile_image_url: user.profile_image_url
     };
-    res.json(res.locals);
+    return res.json(res.locals);
   });
 
   // TODO: facebook login

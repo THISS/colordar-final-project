@@ -1,14 +1,16 @@
 // events table
-module.exports = function(knex) {
+module.exports = function(knex, logger) {
+  const TABLE_NAME = 'events';
+
   // functions for the database go here
   const addEvent = (eventObj) => {
     return knex.insert(eventObj, ['id', 'color_id', 'calendar_id', 'name', 'start_time', 'end_time', 'location'])
-      .into('events');
+      .into(TABLE_NAME);
   };
 
   const deleteEvent = (eventId) => {
     return knex.del()
-      .from('events')
+      .from(TABLE_NAME)
       .where({id: eventId});
   };
 
@@ -21,7 +23,7 @@ module.exports = function(knex) {
       'end_time',
       'location'
     )
-      .from('events')
+      .from(TABLE_NAME)
       .where({ calendar_id: calendarId });
   };
 
@@ -35,7 +37,7 @@ module.exports = function(knex) {
       'end_time',
       'location'
     )
-    .from('events')
+    .from(TABLE_NAME)
     .where({id: eventId});
   };
 
@@ -51,7 +53,7 @@ module.exports = function(knex) {
       'end_time',
       'location'
     )
-      .from('events')
+      .from(TABLE_NAME)
       .innerJoin('master_calendars', 'events.calendar_id', '=', 'master_calendars.calendar_id')
       .innerJoin('users', 'master_calendars.user_id', '=', 'users.id')
       .where({
@@ -75,7 +77,7 @@ module.exports = function(knex) {
   };
 
   const updateEvent = (eventId, eventObj) => {
-    return knex('events')
+    return knex(TABLE_NAME)
       .update(eventObj)
       .where({id: eventId})
       .returning([

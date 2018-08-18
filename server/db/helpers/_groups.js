@@ -1,12 +1,14 @@
 // groups table
-module.exports = function(knex) {
-const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
+
+module.exports = function(knex, logger) {
+  const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
+  const TABLE_NAME = 'groups';
 
   // functions for the database go here
   const addGroup = (groupObj) => {
     return Promise.all([
       knex.insert(groupObj, ['id', 'name', 'color_id'])
-        .into('groups'),
+        .into(TABLE_NAME),
       addCalendar(groupObj) 
     ]);
   };
@@ -49,7 +51,7 @@ const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
       'name',
       'color_id'
     )
-    .from('groups')
+    .from(TABLE_NAME)
     .innerJoin('users_groups', 'users_groups.group_id', '=', 'groups.id')
     .where({user_id: userId});
   };
@@ -61,7 +63,7 @@ const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
       'color_id',
       'calendar_id'
     )
-    .from('groups')
+    .from(TABLE_NAME)
     .innerJoin('groups_calendars', 'groups_calendars.group_id', '=', 'groups.id')
     .where({id: groupId});
   };
@@ -99,7 +101,7 @@ const { addCalendar, linkMaster } = require(`${__dirname}/_calendars.js`)(knex);
   };
 
   const updateGroup = (groupId, groupObj) => {
-    return knex('groups')
+    return knex(TABLE_NAME)
       .update(groupObj)
       .where({id: groupId})
       .returning(['id','name', 'color_id']);

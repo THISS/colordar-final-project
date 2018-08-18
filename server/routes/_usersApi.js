@@ -49,7 +49,10 @@ module.exports = (db, passport, log, loggedInMiddleware) => {
         if (err) {
           return next(err);
         }
+
+        const { id, ...restOfUser } = user;
         res.locals.loggedIn = true;
+        res.locals.user = restOfUser;
         return res.json(res.locals);
       });
     })(req, res, next);
@@ -64,13 +67,21 @@ module.exports = (db, passport, log, loggedInMiddleware) => {
 
   router.get("/profile", loggedInMiddleware, (req, res) => {
     // return the user object
-    const user = req.user[0];
-    res.locals.user = {
-      email: user.email,
-      first_name: user.first_name,
-      profile_image_url: user.profile_image_url
-    };
-    return res.json(res.locals);
+    db.getUserById(req.user.id)
+      .then(user => {
+        log.info(`user keys ${Object.keys(user)}`);
+        res.locals.user = {
+          email: user.email,
+          first_name: user.first_name,
+          profile_image_url: user.profile_image_url
+        };
+
+        return res.json(res.locals);
+      })
+      .catch(err => {
+        log.error(err);
+        done(err);
+      });
   });
 
   // TODO: facebook login

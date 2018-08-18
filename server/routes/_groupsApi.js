@@ -6,7 +6,7 @@ module.exports = (db, log) => {
   
   const errorHandler = (error, res) => {
     log.error(error);
-    res.json({error: 'something funky went down'});
+    return res.json({error: 'something funky went down'});
   };
 
   const emailUsers = (email, uurl) => { // TODO: implement this feature
@@ -20,7 +20,7 @@ module.exports = (db, log) => {
   };
   
   router.get('/',(req, res) => {
-    const userId = 1; // TODO: convert
+    const userId = req.user.id;
     const responseObj = {};
     
     db.groups.getAllGroups(userId)
@@ -34,7 +34,7 @@ module.exports = (db, log) => {
   });
 
   router.post('/', (req, res) => {
-    const userId = 1; // TODO:
+    const userId = req.user.id;
     const responseObj = {};
 
     const groupInput =  req.body;
@@ -83,7 +83,7 @@ module.exports = (db, log) => {
 
   router.get('/:id', (req, res) => {
     const groupId = req.params.id;
-    const userId = 1; // TODO: update
+    const userId = req.user.id; update
     const responseObj = {};
 
     if (!groupId) {
@@ -110,7 +110,7 @@ module.exports = (db, log) => {
 
   router.get('/:id/withusers', (req, res) => {
     const groupId = req.params.id;
-    const userId = 1; // TODO: update
+    const userId = req.user.id;
     const responseObj = {};
 
     if (!groupId) {
@@ -153,7 +153,7 @@ module.exports = (db, log) => {
   });
 
   router.put('/:id/addemails', (req, res) => {
-    const userId = 1; // TODO:
+    const userId = req.user.id;
     const groupId = req.params.id;
     const emailsInput = req.body.emails;
 

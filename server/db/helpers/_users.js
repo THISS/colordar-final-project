@@ -12,7 +12,7 @@ module.exports = function(knex, logger) {
   const getUserByEmail = email => {
     logger.info(`Checking db for email: ${email}`);
 
-    return knex.select()
+    return knex.first()
     .from(TABLE_NAME)
     .where('email', '=', email);
   };
@@ -20,7 +20,7 @@ module.exports = function(knex, logger) {
   const getUserById = id => {
     logger.info(`Checking db for user id: ${id}`);
     
-    return knex.select(['id', 'email', 'first_name', 'profile_image_url'])
+    return knex.first(['id', 'email', 'first_name', 'profile_image_url'])
     .from(TABLE_NAME)
     .where('id', '=', id);
   };

@@ -8,7 +8,7 @@ module.exports = (db, log) => {
   };
   
   router.get('/',(req, res) => {
-    const userId = req.user[0].id;
+    const userId = req.user.id;
     const responseObj = {};
 
     log.info(`The current user id ${userId} is requesting calendars`);
@@ -25,7 +25,7 @@ module.exports = (db, log) => {
 
   // Creating a new calendar requires: color_id (1-4)| owner_id (current logged in user)| name
   router.post('/', (req, res) => {
-    const userId = req.user[0].id;
+    const userId = req.user.id;
     const responseObj = {};
 
     const calendarInput =  req.body;
@@ -46,7 +46,7 @@ module.exports = (db, log) => {
 
   router.get('/:id', (req, res) => {
     const calendarId = req.params.id;
-    const userId = req.user[0].id;
+    const userId = req.user.id;
     const responseObj = {};
 
     if (!calendarId) {
@@ -90,7 +90,7 @@ module.exports = (db, log) => {
   });
 
   router.put('/master/edit', (req, res) => {
-    const userId = req.user[0].id;
+    const userId = req.user.id;
     const { merged, calendar_id } = req.body;
 
     db.calendars.updateMaster(userId, calendar_id, !!parseInt(merged))

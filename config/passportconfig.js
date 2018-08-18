@@ -10,15 +10,7 @@ module.exports = (passport, dbHelpers, log) => {
   });
 
   passport.deserializeUser((id, done) => {
-    dbHelpers.users
-      .getUserById(id)
-      .then(user => {
-        done(null, user);
-      })
-      .catch(err => {
-        log.error(err);
-        done(err);
-      });
+    done(null, { id }); // don't get the user every time we hit the server
   });
 
   // Local Signup
@@ -42,7 +34,7 @@ module.exports = (passport, dbHelpers, log) => {
         dbHelpers.users
           .getUserByEmail(email)
           .then(user => {
-            if (user.length > 0) {
+            if (user.id) {
               return done(null, false, BADSIGNUPMESSAGE);
             }
             // otherwise we need to create this user
@@ -77,19 +69,21 @@ module.exports = (passport, dbHelpers, log) => {
         dbHelpers.users
           .getUserByEmail(email)
           .then(userResponse => {
-            if (userResponse.length < 1) {
+            if (!userResponse.id) {
               return done(null, false, BADLOGINMESSAGE);
             }
+            // Stripping the password from the user object
+            const { password_digest, ...user} = userResponse;
             if (
               !dbHelpers.users.comparePassword(
                 password,
-                userResponse[0].password_digest
+                password_digest
               )
             ) {
               return done(null, false, BADLOGINMESSAGE);
             }
-            // Return our user
-            return done(null, userResponse[0]);
+            // Return our user minus the password
+            return done(null, user);
           })
           .catch(err => {
             log.error(err);

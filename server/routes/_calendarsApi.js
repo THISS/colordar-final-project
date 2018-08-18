@@ -14,15 +14,16 @@ module.exports = (db, log) => {
     log.info(`The current user id ${userId} is requesting calendars`);
     
     db.calendars.getAllCalendars(userId)
-      .then((queryResponse) => {
+      .then(queryResponse => {
         responseObj.calendars = queryResponse;
         return res.json(responseObj);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
 
+  // Creating a new calendar requires: color_id (1-4)| owner_id (current logged in user)| name
   router.post('/', (req, res) => {
     const userId = req.user[0].id;
     const responseObj = {};
@@ -88,6 +89,19 @@ module.exports = (db, log) => {
     }
   });
 
+  router.put('/master/edit', (req, res) => {
+    const userId = req.user[0].id;
+    const { merged, calendar_id } = req.body;
+
+    db.calendars.updateMaster(userId, calendar_id, !!parseInt(merged))
+      .then(queryResponse => {
+        return res.json({success: true, merged})
+      })
+      .catch(error => {
+        errorHandler(error, res);
+      });
+  });
+
   router.put('/:id/edit', (req, res) => {
     const calendarId = req.params.id;
     const calendarInput =  req.body;
@@ -96,7 +110,7 @@ module.exports = (db, log) => {
       .then(queryResponse => {
         return res.json(queryResponse[0]);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });

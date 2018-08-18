@@ -36,19 +36,31 @@ module.exports = function(knex, logger) {
     })
     .into('master_calendars');
   };
-
+  
   const updateCalendar = (calendarId, calendarObj) => {
     return knex(TABLE_NAME)
-      .update(calendarObj)
-      .where({id: calendarId})
-      .returning(['id','name', 'color_id']);
+    .update(calendarObj)
+    .where({id: calendarId})
+    .returning(['id','name', 'color_id']);
   };
+  
+    const updateMaster = (userId, calendarId, merged) => {
+      return knex('master_calendars')
+        .update({
+          merged
+        })
+        .where({
+          calendar_id: calendarId,
+          user_id: userId
+        });
+    };
 
   return {
     addCalendar,
     getAllCalendars,
     getCalendarById,
     linkMaster,
-    updateCalendar
+    updateCalendar,
+    updateMaster
   };
 }

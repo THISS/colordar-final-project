@@ -5,15 +5,16 @@ module.exports = function(knex, logger) {
   const TABLE_NAME = 'groups';
 
   // functions for the database go here
-  const addGroup = (groupObj) => {
+  const addGroup = groupObj => {
     return Promise.all([
       knex.insert(groupObj, ['id', 'name', 'color_id'])
         .into(TABLE_NAME),
+
       addCalendar(groupObj) 
     ]);
   };
   
-  const addUserToGroupByUurl = (uurl) => {
+  const addUserToGroupByUurl = uurl => {
     // Get group id and email
     let groupId;
 
@@ -26,7 +27,7 @@ module.exports = function(knex, logger) {
       uurl,
       token_used: false
     })
-    .then((queryResponse) => {
+    .then(queryResponse => {
       if (!queryResponse) {
         return Promise.reject('no available user matches that token');
       }
@@ -37,46 +38,46 @@ module.exports = function(knex, logger) {
       .from('users')
       .where({email: queryResponse.added_user_email})
     })
-    .then((queryResponse) => {
+    .then(queryResponse => {
       return linkUser(queryResponse.id, groupId);
     })
-    .then((queryResponse) => {
+    .then(queryResponse => {
       return updateTracked(uurl);
     })
   };
 
-  const getAllGroups = (userId) => {
-    return knex.select(
+  const getAllGroups = userId => {
+    return knex.select([
       'id',
       'name',
       'color_id'
-    )
+    ])
     .from(TABLE_NAME)
     .innerJoin('users_groups', 'users_groups.group_id', '=', 'groups.id')
-    .where({user_id: userId});
+    .where({ user_id: userId });
   };
 
-  const getGroupById = (groupId) => {
-    return knex.first(
+  const getGroupById = groupId => {
+    return knex.first([
       'id',
       'name',
       'color_id',
       'calendar_id'
-    )
+    ])
     .from(TABLE_NAME)
     .innerJoin('groups_calendars', 'groups_calendars.group_id', '=', 'groups.id')
-    .where({id: groupId});
+    .where({ id: groupId });
   };
 
   const getUsersByGroup = (groupId, userId) => {
-    return knex.select(
+    return knex.select([
       'id',
       'first_name'
-    )
+    ])
     .from('users')
     .innerJoin('users_groups', 'users_groups.user_id', '=', 'users.id')
-    .where({group_id: groupId})
-    .whereNot({user_id: userId});
+    .where({ group_id: groupId })
+    .whereNot({ user_id: userId });
   };
 
   const linkCalendar = (groupId, calendarId) => {
@@ -95,7 +96,7 @@ module.exports = function(knex, logger) {
       .into('users_groups');
   };
 
-  const requestUsersToJoin = (usersArr) => {
+  const requestUsersToJoin = usersArr => {
     return knex.insert(usersArr, ['added_user_email', 'uurl'])
       .into('track_users_groups');
   };
@@ -107,12 +108,12 @@ module.exports = function(knex, logger) {
       .returning(['id','name', 'color_id']);
   };
 
-  const updateTracked = (uurl) => {
+  const updateTracked = uurl => {
     // update the token_used
     return knex('track_users_groups').update({
       token_used: true
     })
-      .where({uurl});
+      .where({ uurl });
   };
 
   return {

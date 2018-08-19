@@ -24,11 +24,11 @@ module.exports = (db, log) => {
     const responseObj = {};
     
     db.groups.getAllGroups(userId)
-      .then((queryResponse) => {
+      .then(queryResponse => {
         responseObj.groups = queryResponse;
-        res.json(responseObj);
+        return res.json(responseObj);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
@@ -41,7 +41,8 @@ module.exports = (db, log) => {
     groupInput.owner_id = userId;
 
     db.groups.addGroup(groupInput)
-      .then((queryResponse) => {
+      .then(queryResponse => {
+        // queryResponse is Promise.all where [0] is group and [1] is calendar for group
         responseObj.groups = queryResponse[0];
         return Promise.all([
           db.groups.linkUser(
@@ -49,8 +50,8 @@ module.exports = (db, log) => {
             queryResponse[0][0].id
           ),
           db.groups.linkCalendar(
-            queryResponse[0][0].id,
-            queryResponse[1][0].id
+            queryResponse[0][0].id,// new group
+            queryResponse[1][0].id // new calendar for group
           ),
           db.calendars.linkMaster(
             userId,
@@ -58,10 +59,10 @@ module.exports = (db, log) => {
           )
         ]);
       })
-      .then((queryResponse) => {
-        res.json(responseObj);
+      .then(queryResponse => {
+        return res.json(responseObj);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
@@ -73,37 +74,39 @@ module.exports = (db, log) => {
   router.get('/addusertogroup', (req, res) => {
     const uniqueUrl = req.query.uurl;
     db.groups.addUserToGroupByUurl(uniqueUrl)
-      .then((queryResponse) => {
-        res.json({success: true})
+      .then(queryResponse => {
+        return res.json({success: true})
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
 
   router.get('/:id', (req, res) => {
     const groupId = req.params.id;
-    const userId = req.user.id; update
+    const userId = req.user.id;
     const responseObj = {};
 
     if (!groupId) {
       errorHandler('no groupId given', res);
     }
+
     db.groups.getGroupById(groupId)
-      .then((queryResponse) => {
-        console.log(queryResponse);
+      .then(queryResponse => {
+
         Object.assign(responseObj, {
           id: queryResponse.id,
           name: queryResponse.name,
           color_id: queryResponse.color_id
         });
+
         return db.calendars.getCalendarById(queryResponse.calendar_id);
       })
-      .then((queryResponse) => {
+      .then(queryResponse => {
         responseObj.calendar = queryResponse;
-        res.json(responseObj);
+        return res.json(responseObj);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
@@ -116,25 +119,27 @@ module.exports = (db, log) => {
     if (!groupId) {
       errorHandler('no groupId given', res);
     }
+
     Promise.all([
       db.groups.getGroupById(groupId),
       db.groups.getUsersByGroup(groupId, userId)
     ])
-      .then((queryResponse) => {
-        console.log(queryResponse);
+      .then(queryResponse => {
+
         Object.assign(responseObj, {
           id: queryResponse[0].id,
           name: queryResponse[0].name,
           color_id: queryResponse[0].color_id,
           users: queryResponse[1]
         });
+
         return db.calendars.getCalendarById(queryResponse[0].calendar_id);
       })
-      .then((queryResponse) => {
+      .then(queryResponse => {
         responseObj.calendar = queryResponse;
-        res.json(responseObj);
+        return res.json(responseObj);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
@@ -144,10 +149,10 @@ module.exports = (db, log) => {
     const groupInput = req.body;
 
     db.groups.updateGroup(groupId, groupInput)
-      .then((queryResponse) => {
-        res.json(queryResponse);
+      .then(queryResponse => {
+        return res.json(queryResponse);
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });
@@ -157,7 +162,7 @@ module.exports = (db, log) => {
     const groupId = req.params.id;
     const emailsInput = req.body.emails;
 
-    const addUsersToGroup = emailsInput.map((email) => ({
+    const addUsersToGroup = emailsInput.map(email => ({
         inviter_id: userId,
         group_id: groupId,
         added_user_email: email,
@@ -166,14 +171,15 @@ module.exports = (db, log) => {
     }));
 
     db.groups.requestUsersToJoin(addUsersToGroup)
-      .then((queryResponse) => {
-        for (let i = 0; i < queryResponse.length; ++i) {
+      .then(queryResponse => {
+        for (let i = 0; i < queryResponse.length; i++) {
           emailUsers(queryResponse[i].added_user_email, queryResponse[i].uurl);
           notifyUsers(queryResponse[i].added_user_email, queryResponse[i].uurl);
         }
-        res.json({success: true});
+
+        return res.json({success: true});
       })
-      .catch((error) => {
+      .catch(error => {
         errorHandler(error, res);
       });
   });

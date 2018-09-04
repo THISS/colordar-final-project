@@ -8,10 +8,10 @@ module.exports = (db, log) => {
     return res.json({ error: 'something funky went down' });
   };
 
-  router.get('/',(req, res) => {
+  router.get('/', (req, res) => {
     const calId = req.query.calid;
     
-    const isMaster = req.query.ismaster;
+    const isMaster = !calId;
     const userId = req.user.id;
     const responseObj = {};
 
@@ -32,20 +32,29 @@ module.exports = (db, log) => {
 
       // TODO: make a pagination for the above query
     }else {
-      db.getAllCalendarEvents(calId)
+      db.getAllCalendarEvents(calId, userId)
         .then(queryResponse => {
-          responseObj.events = queryResponse;
+          responseObj.events = queryResponse || [];
           return res.json(responseObj);
         })
         .catch(error => {
-          errorHandler(error, res);
-      });
+          return errorHandler(error, res);
+        });
     }
   });
 
   router.post('/', (req, res) => {
     const eventInput = req.body;
+
+    // TODO: remove these when sending to server for reals
+    let start = new Date("2018/09/03 10:00");
+    let end = new Date("2018/09/03 11:00");
+
+    eventInput.start_time = eventInput.start_time !== "now plus one day" ? eventInput.start_time : start;
+    eventInput.end_time = eventInput.end_time !== "start_time plus one hour" ? eventInput.end_time : end;
     
+    eventInput.owner_id = req.user.id;
+
     db.addEvent(eventInput)
       .then(queryResponse => {
         return res.json(queryResponse[0]);
@@ -61,7 +70,9 @@ module.exports = (db, log) => {
       errorHandler('no eventId given', res);
     }
 
-    db.getEventById(eventId)
+    const userId = req.user.id;
+
+    db.getEventById(eventId, userId)
       .then(queryResponse => {
         return res.json(queryResponse);
       })
@@ -93,8 +104,9 @@ module.exports = (db, log) => {
     if (!eventId) {
       errorHandler('no eventId given', res);
     }
+    const userId = req.user.id;
 
-    db.deleteEvent(eventId)
+    db.deleteEvent(eventId, userId)
       .then(success => {
         return res.json({ deleted: true, id: eventId });
       })

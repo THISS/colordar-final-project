@@ -10,13 +10,11 @@ module.exports = (db, log) => {
   };
 
   const emailUsers = (email, uurl) => { // TODO: implement this feature
-    log.info('email > email', email);
-    log.info('email > uurl', uurl);
+    log.info(`EMAIL -> email: ${email}, uurl: ${uurl}`);
   };
-
+  
   const notifyUsers = (email, uurl) => { // TODO: implement this feature
-    log.info('notify > email', email);
-    log.info('notify > uurl', uurl);
+    log.info(`NOTIFY -> email: ${email}, uurl: ${uurl}`);
   };
   
   router.get('/',(req, res) => {
@@ -70,12 +68,13 @@ module.exports = (db, log) => {
   // This is the link that is added to notifications and or sent to a users email address
   // When another user invites them to a group
   // eg.
-  // https://colordar.herokuapp.com/api/groups/addusertogroup?uurl=djfakjdfkajjfkdjfiemfekjdfaekjkefi
-  router.get('/addusertogroup', (req, res) => {
+  // https://colordar.herokuapp.com/api/groups/add-user-to-group?uurl=djfakjdfkajjfkdjfiemfekjdfaekjkefi
+  router.get('/add-user-to-group', (req, res) => {
     const uniqueUrl = req.query.uurl;
+
     db.groups.addUserToGroupByUurl(uniqueUrl)
       .then(queryResponse => {
-        return res.json({success: true})
+        return res.json({ success: true })
       })
       .catch(error => {
         errorHandler(error, res);
@@ -161,6 +160,8 @@ module.exports = (db, log) => {
     const userId = req.user.id;
     const groupId = req.params.id;
     const emailsInput = req.body.emails;
+
+    // TODO: Validate the emails provided
 
     const addUsersToGroup = emailsInput.map(email => ({
         inviter_id: userId,

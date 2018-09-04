@@ -8,37 +8,40 @@ module.exports = function(knex, logger) {
       .into(TABLE_NAME);
   };
 
-  const deleteEvent = eventId => {
+  const deleteEvent = (eventId, userId) => {
     return knex.del()
       .from(TABLE_NAME)
-      .where({ id: eventId });
+      .where({ id: eventId, owner_id: userId });
   };
 
-  const getAllCalendarEvents = calendarId => {
+  const getAllCalendarEvents = (calendarId, userId) => {
     return knex.select(
       'events.id',
       'color_id',
+      'events.calendar_id',
       'name',
       'start_time',
       'end_time',
       'location'
     )
       .from(TABLE_NAME)
-      .where({ calendar_id: calendarId });
+      .innerJoin('master_calendars', 'events.calendar_id', '=', 'master_calendars.calendar_id')
+      .where({ 'events.calendar_id': calendarId, user_id: userId })
   };
 
-  const getEventById = eventId => {
+  const getEventById = (eventId, userId) => {
     return knex.first([
       'id',
       'color_id',
-      'calendar_id',
+      'events.calendar_id',
       'name',
       'start_time',
       'end_time',
       'location'
     ])
     .from(TABLE_NAME)
-    .where({ id: eventId });
+    .innerJoin('master_calendars', 'events.calendar_id', '=', 'master_calendars.calendar_id')
+    .where({ id: eventId, user_id: userId });
   };
 
   const getMasterCalendarEvents = userId => {
@@ -76,10 +79,10 @@ module.exports = function(knex, logger) {
       });
   };
 
-  const updateEvent = (eventId, eventObj) => {
+  const updateEvent = (eventId, eventObj, userId) => {
     return knex(TABLE_NAME)
       .update(eventObj)
-      .where({ id: eventId })
+      .where({ id: eventId, owner_id: userId })
       .returning([
           'id',
           'color_id',
